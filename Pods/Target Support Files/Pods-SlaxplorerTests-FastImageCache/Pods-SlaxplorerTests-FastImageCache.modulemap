@@ -1,0 +1,6 @@
+framework module FastImageCache {
+  umbrella header "Pods-SlaxplorerTests-FastImageCache-umbrella.h"
+
+  export *
+  module * { export * }
+}

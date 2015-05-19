@@ -1,0 +1,6 @@
+framework module Quick {
+  umbrella header "Pods-SlaxplorerTests-Quick-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module DTModelStorage {
+  umbrella header "Pods-DTModelStorage-umbrella.h"
+
+  export *
+  module * { export * }
+}

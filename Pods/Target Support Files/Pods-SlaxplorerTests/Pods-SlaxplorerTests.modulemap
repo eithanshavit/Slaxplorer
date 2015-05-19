@@ -1,0 +1,6 @@
+framework module Pods_SlaxplorerTests {
+  umbrella header "Pods-SlaxplorerTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

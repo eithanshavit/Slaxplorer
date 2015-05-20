@@ -88,10 +88,27 @@ class LoginVC: UIViewController {
       nextButtonState = .Loading
       animateNextButtonToState(nextButtonState)
       nextButton.enabled = false
-      // Escape TextView text
-      let token = tokenTextView.text.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)
-      
+      // Fetch team info
+      CloudManager.mainManager.requestTeamInfoWithToken(tokenTextView.text, completion: handleTeamResponse)
     case .Loading:
+      break
+    }
+  }
+  
+  // Handle response from team info request
+  private func handleTeamResponse(team: Team?, teamDataStatus: TeamDataStatus, connectionStatus: CloudManagerConnectionStatus) {
+    switch connectionStatus {
+    case .OK:
+      break
+    case .NotAuth:
+      break
+    case .InvalidAuth:
+      break
+    case .ConnectionFailure:
+      break
+    case .ParseFailure:
+      break
+    case .UnknownFailure:
       break
     }
   }

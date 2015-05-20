@@ -2,12 +2,15 @@
 
 @interface Team ()
 
-// Private interface goes here.
-
 @end
 
 @implementation Team
 
-// Custom logic goes here.
++ (Team *)createTeamWithID:(NSString *)teamID name:(NSString *)teamName inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+  Team *team = [NSEntityDescription insertNewObjectForEntityForName:[Team entityName] inManagedObjectContext:managedObjectContext];
+  team.name = teamName;
+  team.id = teamID;
+  return team;
+}
 
 @end

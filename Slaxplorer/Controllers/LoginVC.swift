@@ -23,6 +23,7 @@ class LoginVC: UIViewController {
   enum NextButtonState {
     case Idle
     case Loading
+    case Error
   }
   var nextButtonState = NextButtonState.Idle
   
@@ -61,6 +62,7 @@ class LoginVC: UIViewController {
         },
         completion: {
           (Bool) -> Void in
+          self.nextButton.enabled = false
         })
     case .Idle:
       UIView.animateWithDuration(
@@ -74,6 +76,22 @@ class LoginVC: UIViewController {
         },
         completion: {
           (Bool) -> Void in
+          self.nextButton.enabled = true
+        })
+      break
+    case .Error:
+      UIView.animateWithDuration(
+        0.3,
+        delay: 0,
+        options: UIViewAnimationOptions.CurveEaseIn,
+        animations: {
+          () -> Void in
+          self.nextButton.setTitle("hmmm, problems", forState: UIControlState.Normal)
+          self.nextButton.backgroundColor = UIColor(red:0.97, green:0.91, blue:0.11, alpha:1.0)
+        },
+        completion: {
+          (Bool) -> Void in
+          self.nextButton.enabled = false
         })
       break
     }
@@ -87,41 +105,88 @@ class LoginVC: UIViewController {
       // Switch to Loading
       nextButtonState = .Loading
       animateNextButtonToState(nextButtonState)
-      nextButton.enabled = false
       // Fetch team info
       CloudManager.mainManager.requestTeamInfoWithToken(tokenTextView.text, completion: handleTeamResponse)
-    case .Loading:
+    default:
       break
     }
   }
   
   // Handle response from team info request
   private func handleTeamResponse(team: Team?, teamDataStatus: TeamDataStatus, connectionStatus: CloudManagerConnectionStatus) {
-    switch connectionStatus {
-    case .OK:
+    switch (connectionStatus, teamDataStatus) {
+    case (.OK, .OK):
       break
-    case .NotAuth:
-      break
-    case .InvalidAuth:
-      break
-    case .ConnectionFailure:
-      break
-    case .ParseFailure:
-      break
-    case .UnknownFailure:
-      break
+    case (.OK, .AccountInactive):
+      showError("The team you're interested in was deleted")
+    case (.OK, .Unknown), (.UnknownFailure, _):
+      showError("Hmmm, something happened, but I'm not sure what")
+    case (.NotAuth, _):
+      showError("Apologies, no access token was provided")
+    case (.InvalidAuth, _):
+      showError("Apologies, invalid access token was provided")
+    case (.ConnectionFailure, _):
+      showError("Apologies, unable to connect at the moment")
+    case (.ParseFailure, _):
+      showError("Apologies, unable to get data from web")
+    default:
+      assertionFailure("Invalid code path")
     }
   }
   
   // MARK: - Clipboard
   
   @IBAction func clipboardButtonTap(sender: AnyObject) {
+    // Populate token text view with clipboard content
     tokenTextView.text = UIPasteboard.generalPasteboard().string
   }
   
   // MARK: - Prompt Pop
   
   @IBAction func promptButtonTap(sender: AnyObject) {
+    nextButtonState = .Idle
+    animateNextButtonToState(nextButtonState)
+    hidePrompt()
+  }
+  
+  private func showPrompt(text: String) {
+    promptLabel.text = text
+    promptContainer.alpha = 0
+    promptContainer.hidden = false
+    UIView.animateWithDuration(
+      0.3,
+      delay: 0,
+      options: UIViewAnimationOptions.CurveEaseIn,
+      animations: {
+        () -> Void in
+        self.promptContainer.alpha = 1
+      },
+      completion: {
+        (Bool) -> Void in
+      })
+  }
+  
+  private func hidePrompt() {
+    UIView.animateWithDuration(
+      0.3,
+      delay: 0,
+      options: UIViewAnimationOptions.CurveEaseIn,
+      animations: {
+        () -> Void in
+        self.promptContainer.alpha = 0
+      },
+      completion: {
+        (Bool) -> Void in
+        self.promptContainer.hidden = true
+      })
+  }
+  
+  // MARK: - Error reporting
+  
+  private func showError(text: String) {
+    showPrompt(text)
+    nextButtonState = .Error
+    animateNextButtonToState(nextButtonState)
   }
   
 }

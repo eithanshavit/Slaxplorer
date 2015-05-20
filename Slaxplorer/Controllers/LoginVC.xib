@@ -69,20 +69,14 @@
                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEZ-ne-bXi" userLabel="promptContainer">
                             <rect key="frame" x="0.0" y="0.0" width="270" height="251"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apologies, we're unable to connect at the moment" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="I9a-2J-UoR" userLabel="promptLabel">
-                                    <rect key="frame" x="0.0" y="0.0" width="270" height="211"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3KS-p2-9CF" userLabel="promptButton">
-                                    <rect key="frame" x="0.0" y="211" width="270" height="40"/>
+                                    <rect key="frame" x="0.0" y="201" width="270" height="50"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="40" id="XKx-Uy-zvr"/>
+                                        <constraint firstAttribute="height" constant="50" id="XKx-Uy-zvr"/>
                                     </constraints>
-                                    <state key="normal" title="ok">
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <state key="normal" title="try again">
                                         <color key="titleColor" red="1" green="0.56078431370000004" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -90,15 +84,22 @@
                                         <action selector="promptButtonTap:" destination="-1" eventType="touchUpInside" id="vok-hb-8dp"/>
                                     </connections>
                                 </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apologies, we're unable to connect at the moment" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="I9a-2J-UoR" userLabel="promptLabel">
+                                    <rect key="frame" x="15" y="15" width="240" height="171"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="25"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
-                            <color key="backgroundColor" red="0.96078431372549022" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.97254901960784312" green="0.90588235294117647" blue="0.10980392156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstItem="I9a-2J-UoR" firstAttribute="top" secondItem="sEZ-ne-bXi" secondAttribute="top" id="2tR-B5-2RM"/>
-                                <constraint firstItem="3KS-p2-9CF" firstAttribute="top" secondItem="I9a-2J-UoR" secondAttribute="bottom" id="42g-Ea-3j6"/>
+                                <constraint firstItem="I9a-2J-UoR" firstAttribute="top" secondItem="sEZ-ne-bXi" secondAttribute="top" constant="15" id="2tR-B5-2RM"/>
+                                <constraint firstItem="3KS-p2-9CF" firstAttribute="top" secondItem="I9a-2J-UoR" secondAttribute="bottom" constant="15" id="42g-Ea-3j6"/>
                                 <constraint firstAttribute="bottom" secondItem="3KS-p2-9CF" secondAttribute="bottom" id="Qqd-B3-5Mq"/>
                                 <constraint firstAttribute="trailing" secondItem="3KS-p2-9CF" secondAttribute="trailing" id="Y1Q-aL-i1h"/>
-                                <constraint firstItem="I9a-2J-UoR" firstAttribute="leading" secondItem="sEZ-ne-bXi" secondAttribute="leading" id="a1e-xE-zi4"/>
-                                <constraint firstAttribute="trailing" secondItem="I9a-2J-UoR" secondAttribute="trailing" id="usY-UX-Jfn"/>
+                                <constraint firstItem="I9a-2J-UoR" firstAttribute="leading" secondItem="sEZ-ne-bXi" secondAttribute="leading" constant="15" id="a1e-xE-zi4"/>
+                                <constraint firstAttribute="trailing" secondItem="I9a-2J-UoR" secondAttribute="trailing" constant="15" id="usY-UX-Jfn"/>
                                 <constraint firstItem="3KS-p2-9CF" firstAttribute="leading" secondItem="sEZ-ne-bXi" secondAttribute="leading" id="wbx-WS-LAf"/>
                             </constraints>
                         </view>

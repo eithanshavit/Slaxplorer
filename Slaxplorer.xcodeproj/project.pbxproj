@@ -22,6 +22,8 @@
 		D0F390931B0C0E8900EB0DD6 /* DataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F390921B0C0E8900EB0DD6 /* DataStack.swift */; };
 		D0F390951B0C119200EB0DD6 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F390941B0C119200EB0DD6 /* Errors.swift */; };
 		D0F390971B0C23FA00EB0DD6 /* TeamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F390961B0C23FA00EB0DD6 /* TeamManager.swift */; };
+		D0F3909E1B0C40FA00EB0DD6 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F3909C1B0C40FA00EB0DD6 /* LoginVC.swift */; };
+		D0F3909F1B0C40FA00EB0DD6 /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F3909D1B0C40FA00EB0DD6 /* LoginVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,8 @@
 		D0F390921B0C0E8900EB0DD6 /* DataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataStack.swift; path = Objects/DataStack.swift; sourceTree = "<group>"; };
 		D0F390941B0C119200EB0DD6 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = Objects/Errors.swift; sourceTree = "<group>"; };
 		D0F390961B0C23FA00EB0DD6 /* TeamManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamManager.swift; path = Objects/TeamManager.swift; sourceTree = "<group>"; };
+		D0F3909C1B0C40FA00EB0DD6 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginVC.swift; path = Controllers/LoginVC.swift; sourceTree = "<group>"; };
+		D0F3909D1B0C40FA00EB0DD6 /* LoginVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginVC.xib; path = Controllers/LoginVC.xib; sourceTree = "<group>"; };
 		D1A9B3662621EE40570D4475 /* Pods-SlaxplorerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlaxplorerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SlaxplorerTests/Pods-SlaxplorerTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -158,6 +162,8 @@
 			children = (
 				D0F3907D1B0BF69300EB0DD6 /* MainNavigationVC.swift */,
 				D0F390781B0BF57000EB0DD6 /* AppDelegate.swift */,
+				D0F3909C1B0C40FA00EB0DD6 /* LoginVC.swift */,
+				D0F3909D1B0C40FA00EB0DD6 /* LoginVC.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -301,6 +307,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0F3909F1B0C40FA00EB0DD6 /* LoginVC.xib in Resources */,
 				D0561D821B0BE6260026EEA0 /* LaunchScreen.xib in Resources */,
 				D0561D7F1B0BE6260026EEA0 /* Images.xcassets in Resources */,
 			);
@@ -413,6 +420,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0F3909E1B0C40FA00EB0DD6 /* LoginVC.swift in Sources */,
 				D0F390881B0C0CA300EB0DD6 /* Team.m in Sources */,
 				D0F3908D1B0C0CAF00EB0DD6 /* _Member.m in Sources */,
 				D0F390931B0C0E8900EB0DD6 /* DataStack.swift in Sources */,

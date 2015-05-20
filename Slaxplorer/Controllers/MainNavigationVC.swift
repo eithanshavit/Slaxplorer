@@ -15,8 +15,9 @@ class MainNavigationVC: UINavigationController {
     super.init(nibName: nil, bundle: nil)
     dataStack = DataStack.sharedInstance
     
-    if let team = TeamManager.currentTeam(dataStack) {
+    if let team = TeamManager.loggedInTeam(dataStack) {
     } else {
+      setViewControllers([LoginVC()], animated: false)
     }
     
   }

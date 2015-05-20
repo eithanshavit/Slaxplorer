@@ -96,7 +96,7 @@ class DataStack: NSObject {
     return coordinator
     }()
   
-  lazy var managedObjectContext: NSManagedObjectContext? = {
+  lazy var managedObjectContext: NSManagedObjectContext! = {
     // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
     let coordinator = self.persistentStoreCoordinator
     if coordinator == nil {
@@ -107,7 +107,7 @@ class DataStack: NSObject {
     return managedObjectContext
     }()
   
-  lazy var backgroundManagedObjectContext: NSManagedObjectContext? = {
+  lazy var backgroundManagedObjectContext: NSManagedObjectContext! = {
     // Returns the background managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
     let coordinator = self.persistentStoreCoordinator
     if coordinator == nil {

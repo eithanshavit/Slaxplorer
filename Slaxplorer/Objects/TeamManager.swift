@@ -40,7 +40,10 @@ class TeamManager: NSObject {
       }
     } else {
       println("Could not fetch \(error!), \(error!.userInfo)")
+      assertionFailure("There must be at most 1 logged-in team")
     }
+    assertionFailure("Not a valid code path")
+    return nil
   }
 
 }

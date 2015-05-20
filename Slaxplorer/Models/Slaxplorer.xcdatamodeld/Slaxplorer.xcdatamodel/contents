@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Member" representedClassName="Member" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image48" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image192" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isActive" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isAdmin" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isOwner" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="realName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="team" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="members" inverseEntity="Team" syncable="YES"/>
+    </entity>
+    <entity name="Team" representedClassName="Team" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="loggedIn" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="members" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Member" inverseName="team" inverseEntity="Member" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Team" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="Member" positionX="-54" positionY="18" width="128" height="225"/>
+    </elements>
 </model>

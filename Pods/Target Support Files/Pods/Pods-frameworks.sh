@@ -49,15 +49,11 @@ code_sign() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Alamofire.framework'
-  install_framework 'DTModelStorage.framework'
-  install_framework 'DTTableViewManager.framework'
   install_framework 'FastImageCache.framework'
   install_framework 'pop.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Alamofire.framework'
-  install_framework 'DTModelStorage.framework'
-  install_framework 'DTTableViewManager.framework'
   install_framework 'FastImageCache.framework'
   install_framework 'pop.framework'
 fi

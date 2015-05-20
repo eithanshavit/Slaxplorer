@@ -38,6 +38,7 @@ class LoginVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    tokenTextView.text = Secrets.defaultAPIToken
   }
   
   override func didReceiveMemoryWarning() {

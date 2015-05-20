@@ -25,6 +25,7 @@
 		D0F3909E1B0C40FA00EB0DD6 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F3909C1B0C40FA00EB0DD6 /* LoginVC.swift */; };
 		D0F3909F1B0C40FA00EB0DD6 /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F3909D1B0C40FA00EB0DD6 /* LoginVC.xib */; };
 		D0F390A11B0C5EBC00EB0DD6 /* CloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F390A01B0C5EBC00EB0DD6 /* CloudManager.swift */; };
+		D0F390A31B0D287B00EB0DD6 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F390A21B0D287B00EB0DD6 /* Secrets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		D0F3909C1B0C40FA00EB0DD6 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginVC.swift; path = Controllers/LoginVC.swift; sourceTree = "<group>"; };
 		D0F3909D1B0C40FA00EB0DD6 /* LoginVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginVC.xib; path = Controllers/LoginVC.xib; sourceTree = "<group>"; };
 		D0F390A01B0C5EBC00EB0DD6 /* CloudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudManager.swift; path = Objects/CloudManager.swift; sourceTree = "<group>"; };
+		D0F390A21B0D287B00EB0DD6 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Secrets.swift; path = Objects/Secrets.swift; sourceTree = "<group>"; };
 		D1A9B3662621EE40570D4475 /* Pods-SlaxplorerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlaxplorerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SlaxplorerTests/Pods-SlaxplorerTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -209,6 +211,7 @@
 				D0F390941B0C119200EB0DD6 /* Errors.swift */,
 				D0F390961B0C23FA00EB0DD6 /* TeamManager.swift */,
 				D0F390A01B0C5EBC00EB0DD6 /* CloudManager.swift */,
+				D0F390A21B0D287B00EB0DD6 /* Secrets.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -434,6 +437,7 @@
 				D0F390811B0BF6A800EB0DD6 /* Slaxplorer.xcdatamodeld in Sources */,
 				D0F390871B0C0CA300EB0DD6 /* Member.m in Sources */,
 				D0F390951B0C119200EB0DD6 /* Errors.swift in Sources */,
+				D0F390A31B0D287B00EB0DD6 /* Secrets.swift in Sources */,
 				D0F3908E1B0C0CAF00EB0DD6 /* _Team.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

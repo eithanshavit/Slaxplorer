@@ -27,33 +27,30 @@
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r7G-14-9mC" userLabel="inputContainer">
-                    <rect key="frame" x="53" y="208" width="270" height="251"/>
+                    <rect key="frame" x="53" y="201" width="270" height="266"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="token_bg" translatesAutoresizingMaskIntoConstraints="NO" id="b80-Zx-p5d" userLabel="inputBoxBGImageView">
-                            <rect key="frame" x="0.0" y="45" width="270" height="146"/>
+                            <rect key="frame" x="0.0" y="60" width="270" height="146"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="146" id="ROD-BB-03I"/>
                             </constraints>
                         </imageView>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="xoxp-4698769766-4698769768-4898023905-7a1afa" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2Ce-xf-yLC" userLabel="tokenTextView">
-                            <rect key="frame" x="10" y="55" width="250" height="126"/>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2Ce-xf-yLC" userLabel="tokenTextView">
+                            <rect key="frame" x="10" y="70" width="250" height="126"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="textColor" red="0.58039215686274515" green="0.58039215686274515" blue="0.58039215686274515" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="29"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                         </textView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have an access token?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vVn-Bi-9xs" userLabel="tokenLabel">
-                            <rect key="frame" x="0.0" y="0.0" width="270" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="RGt-Cv-Emc"/>
-                            </constraints>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We're using a test access token. Or, you can use your own. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vVn-Bi-9xs" userLabel="tokenLabel">
+                            <rect key="frame" x="0.0" y="0.0" width="270" height="42"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GY2-Cd-6Jy" userLabel="clipboardButton">
-                            <rect key="frame" x="45" y="209" width="180" height="42"/>
+                            <rect key="frame" x="45" y="224" width="180" height="42"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="180" id="CWV-Nn-Sye"/>
                                 <constraint firstAttribute="height" constant="42" id="lsd-5h-tVX"/>
@@ -67,10 +64,10 @@
                             </connections>
                         </button>
                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEZ-ne-bXi" userLabel="promptContainer">
-                            <rect key="frame" x="0.0" y="0.0" width="270" height="251"/>
+                            <rect key="frame" x="0.0" y="0.0" width="270" height="266"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3KS-p2-9CF" userLabel="promptButton">
-                                    <rect key="frame" x="0.0" y="201" width="270" height="50"/>
+                                    <rect key="frame" x="0.0" y="216" width="270" height="50"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="50" id="XKx-Uy-zvr"/>
@@ -85,7 +82,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apologies, we're unable to connect at the moment" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="I9a-2J-UoR" userLabel="promptLabel">
-                                    <rect key="frame" x="15" y="15" width="240" height="171"/>
+                                    <rect key="frame" x="15" y="15" width="240" height="186"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="25"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -110,7 +107,7 @@
                         <constraint firstAttribute="width" constant="270" id="FpZ-ni-aZK"/>
                         <constraint firstItem="b80-Zx-p5d" firstAttribute="leading" secondItem="r7G-14-9mC" secondAttribute="leading" id="Fy6-Ao-1Pi"/>
                         <constraint firstAttribute="trailing" secondItem="sEZ-ne-bXi" secondAttribute="trailing" id="HAg-3v-Iam"/>
-                        <constraint firstItem="b80-Zx-p5d" firstAttribute="top" secondItem="vVn-Bi-9xs" secondAttribute="bottom" constant="15" id="JT9-3k-YMr"/>
+                        <constraint firstItem="b80-Zx-p5d" firstAttribute="top" secondItem="vVn-Bi-9xs" secondAttribute="bottom" constant="18" id="JT9-3k-YMr"/>
                         <constraint firstAttribute="trailing" secondItem="b80-Zx-p5d" secondAttribute="trailing" id="NEB-gU-b2c"/>
                         <constraint firstAttribute="centerX" secondItem="GY2-Cd-6Jy" secondAttribute="centerX" id="Qx4-2t-tb1"/>
                         <constraint firstAttribute="bottom" secondItem="sEZ-ne-bXi" secondAttribute="bottom" id="TXN-VB-YkF"/>

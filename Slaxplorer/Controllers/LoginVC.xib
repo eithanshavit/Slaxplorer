@@ -7,6 +7,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginVC" customModule="Slaxplorer" customModuleProvider="target">
             <connections>
+                <outlet property="clipboardButton" destination="GY2-Cd-6Jy" id="RN9-qr-kuX"/>
+                <outlet property="nextButton" destination="tzU-aV-3LP" id="Hqr-FF-RII"/>
+                <outlet property="promptContainer" destination="sEZ-ne-bXi" id="UcJ-e4-7eX"/>
+                <outlet property="promptLabel" destination="I9a-2J-UoR" id="lKg-VZ-bh8"/>
+                <outlet property="tokenTextView" destination="2Ce-xf-yLC" id="d4B-ID-m3f"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -31,7 +36,7 @@
                                 <constraint firstAttribute="height" constant="146" id="ROD-BB-03I"/>
                             </constraints>
                         </imageView>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="xoxp-4698769766-4698769768-4898023905-7a1afa" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ce-xf-yLC" userLabel="tokenTextView">
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="xoxp-4698769766-4698769768-4898023905-7a1afa" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2Ce-xf-yLC" userLabel="tokenTextView">
                             <rect key="frame" x="10" y="55" width="250" height="126"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="textColor" red="0.58039215686274515" green="0.58039215686274515" blue="0.58039215686274515" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -57,21 +62,64 @@
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="clipboardButtonTap:" destination="-1" eventType="touchUpInside" id="W2x-I5-i9y"/>
+                            </connections>
                         </button>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEZ-ne-bXi" userLabel="promptContainer">
+                            <rect key="frame" x="0.0" y="0.0" width="270" height="251"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apologies, we're unable to connect at the moment" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="I9a-2J-UoR" userLabel="promptLabel">
+                                    <rect key="frame" x="0.0" y="0.0" width="270" height="211"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3KS-p2-9CF" userLabel="promptButton">
+                                    <rect key="frame" x="0.0" y="211" width="270" height="40"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="XKx-Uy-zvr"/>
+                                    </constraints>
+                                    <state key="normal" title="ok">
+                                        <color key="titleColor" red="1" green="0.56078431370000004" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="promptButtonTap:" destination="-1" eventType="touchUpInside" id="vok-hb-8dp"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="0.96078431372549022" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstItem="I9a-2J-UoR" firstAttribute="top" secondItem="sEZ-ne-bXi" secondAttribute="top" id="2tR-B5-2RM"/>
+                                <constraint firstItem="3KS-p2-9CF" firstAttribute="top" secondItem="I9a-2J-UoR" secondAttribute="bottom" id="42g-Ea-3j6"/>
+                                <constraint firstAttribute="bottom" secondItem="3KS-p2-9CF" secondAttribute="bottom" id="Qqd-B3-5Mq"/>
+                                <constraint firstAttribute="trailing" secondItem="3KS-p2-9CF" secondAttribute="trailing" id="Y1Q-aL-i1h"/>
+                                <constraint firstItem="I9a-2J-UoR" firstAttribute="leading" secondItem="sEZ-ne-bXi" secondAttribute="leading" id="a1e-xE-zi4"/>
+                                <constraint firstAttribute="trailing" secondItem="I9a-2J-UoR" secondAttribute="trailing" id="usY-UX-Jfn"/>
+                                <constraint firstItem="3KS-p2-9CF" firstAttribute="leading" secondItem="sEZ-ne-bXi" secondAttribute="leading" id="wbx-WS-LAf"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="GY2-Cd-6Jy" secondAttribute="bottom" id="ArK-gn-pGP"/>
                         <constraint firstAttribute="width" constant="270" id="FpZ-ni-aZK"/>
                         <constraint firstItem="b80-Zx-p5d" firstAttribute="leading" secondItem="r7G-14-9mC" secondAttribute="leading" id="Fy6-Ao-1Pi"/>
+                        <constraint firstAttribute="trailing" secondItem="sEZ-ne-bXi" secondAttribute="trailing" id="HAg-3v-Iam"/>
                         <constraint firstItem="b80-Zx-p5d" firstAttribute="top" secondItem="vVn-Bi-9xs" secondAttribute="bottom" constant="15" id="JT9-3k-YMr"/>
                         <constraint firstAttribute="trailing" secondItem="b80-Zx-p5d" secondAttribute="trailing" id="NEB-gU-b2c"/>
                         <constraint firstAttribute="centerX" secondItem="GY2-Cd-6Jy" secondAttribute="centerX" id="Qx4-2t-tb1"/>
+                        <constraint firstAttribute="bottom" secondItem="sEZ-ne-bXi" secondAttribute="bottom" id="TXN-VB-YkF"/>
                         <constraint firstItem="vVn-Bi-9xs" firstAttribute="top" secondItem="r7G-14-9mC" secondAttribute="top" id="enf-kb-42N"/>
                         <constraint firstItem="vVn-Bi-9xs" firstAttribute="width" secondItem="r7G-14-9mC" secondAttribute="width" id="frZ-0L-sUd"/>
                         <constraint firstAttribute="centerX" secondItem="vVn-Bi-9xs" secondAttribute="centerX" id="gl0-pF-aAx"/>
                         <constraint firstItem="2Ce-xf-yLC" firstAttribute="centerY" secondItem="b80-Zx-p5d" secondAttribute="centerY" id="iOx-hb-pn4"/>
                         <constraint firstItem="2Ce-xf-yLC" firstAttribute="height" secondItem="b80-Zx-p5d" secondAttribute="height" constant="-20" id="ixR-Em-vrA"/>
+                        <constraint firstItem="sEZ-ne-bXi" firstAttribute="leading" secondItem="r7G-14-9mC" secondAttribute="leading" id="lA5-Vm-tAG"/>
+                        <constraint firstItem="sEZ-ne-bXi" firstAttribute="top" secondItem="r7G-14-9mC" secondAttribute="top" id="lF5-Sy-ok5"/>
                         <constraint firstItem="2Ce-xf-yLC" firstAttribute="width" secondItem="b80-Zx-p5d" secondAttribute="width" constant="-20" id="log-uS-9pS"/>
                         <constraint firstItem="2Ce-xf-yLC" firstAttribute="centerX" secondItem="b80-Zx-p5d" secondAttribute="centerX" id="rKy-iY-3gZ"/>
                         <constraint firstItem="GY2-Cd-6Jy" firstAttribute="top" secondItem="b80-Zx-p5d" secondAttribute="bottom" constant="18" id="wmZ-Wd-kNQ"/>
@@ -88,6 +136,9 @@
                         <color key="titleColor" red="0.89411764705882357" green="0.89411764705882357" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="nextButtonTap:" destination="-1" eventType="touchUpInside" id="Wmi-7H-YJ8"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.96078431372549022" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -51,9 +51,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     DataStack.sharedInstance.saveMainContext()
   }
 
-  // MARK: - Core Data stack
-
-  
-
 }
 

@@ -9,8 +9,16 @@ import UIKit
 
 class MainNavigationVC: UINavigationController {
   
+  var dataStack: DataStack!
+  
   init() {
     super.init(nibName: nil, bundle: nil)
+    dataStack = DataStack.sharedInstance
+    
+    if let team = TeamManager.currentTeam(dataStack) {
+    } else {
+    }
+    
   }
   
   required init(coder aDecoder: NSCoder) {

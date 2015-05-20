@@ -21,6 +21,7 @@
 		D0F3908E1B0C0CAF00EB0DD6 /* _Team.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F3908C1B0C0CAF00EB0DD6 /* _Team.m */; };
 		D0F390931B0C0E8900EB0DD6 /* DataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F390921B0C0E8900EB0DD6 /* DataStack.swift */; };
 		D0F390951B0C119200EB0DD6 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F390941B0C119200EB0DD6 /* Errors.swift */; };
+		D0F390971B0C23FA00EB0DD6 /* TeamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F390961B0C23FA00EB0DD6 /* TeamManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		D0F390901B0C0D0400EB0DD6 /* Slaxplorer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Slaxplorer-Bridging-Header.h"; path = "Supporting/Slaxplorer-Bridging-Header.h"; sourceTree = "<group>"; };
 		D0F390921B0C0E8900EB0DD6 /* DataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataStack.swift; path = Objects/DataStack.swift; sourceTree = "<group>"; };
 		D0F390941B0C119200EB0DD6 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = Objects/Errors.swift; sourceTree = "<group>"; };
+		D0F390961B0C23FA00EB0DD6 /* TeamManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamManager.swift; path = Objects/TeamManager.swift; sourceTree = "<group>"; };
 		D1A9B3662621EE40570D4475 /* Pods-SlaxplorerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlaxplorerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SlaxplorerTests/Pods-SlaxplorerTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -197,6 +199,7 @@
 			children = (
 				D0F390921B0C0E8900EB0DD6 /* DataStack.swift */,
 				D0F390941B0C119200EB0DD6 /* Errors.swift */,
+				D0F390961B0C23FA00EB0DD6 /* TeamManager.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				D0F3908D1B0C0CAF00EB0DD6 /* _Member.m in Sources */,
 				D0F390931B0C0E8900EB0DD6 /* DataStack.swift in Sources */,
 				D0F390791B0BF57000EB0DD6 /* AppDelegate.swift in Sources */,
+				D0F390971B0C23FA00EB0DD6 /* TeamManager.swift in Sources */,
 				D0F3907E1B0BF69300EB0DD6 /* MainNavigationVC.swift in Sources */,
 				D0F390811B0BF6A800EB0DD6 /* Slaxplorer.xcdatamodeld in Sources */,
 				D0F390871B0C0CA300EB0DD6 /* Member.m in Sources */,

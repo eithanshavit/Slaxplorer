@@ -9,8 +9,8 @@
 // A class to hold secrets!!
 // Usually this would not be committed, but for exerecise purposes I guess this is ok.
 
-class Secrets {
+public class Secrets {
   
-  static let defaultAPIToken = "xoxp-4698769766-4698769768-4898023905-7a1afa"
+  public static let defaultAPIToken = "xoxp-4698769766-4698769768-4898023905-7a1afa"
   
 }

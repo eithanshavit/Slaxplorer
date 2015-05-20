@@ -6,18 +6,21 @@
 //  Copyright (c) 2015 Eithan Shavit. All rights reserved.
 //
 
+// LogicVC controls the log-in process using an API access token
+// Note: It's defined as a public class for testing purposes
+
 import UIKit
 
-class LoginVC: UIViewController {
+public class LoginVC: UIViewController {
   
   // MARK: - State
   
   // MARK: Outlets
-  @IBOutlet weak var promptLabel: UILabel!
+  @IBOutlet public weak var promptLabel: UILabel!
   @IBOutlet weak var promptContainer: UIView!
   @IBOutlet weak var nextButton: UIButton!
   @IBOutlet weak var clipboardButton: UIButton!
-  @IBOutlet weak var tokenTextView: UITextView!
+  @IBOutlet public weak var tokenTextView: UITextView!
   
   // MARK: General
   enum NextButtonState {
@@ -28,20 +31,22 @@ class LoginVC: UIViewController {
   var nextButtonState = NextButtonState.Idle
   
   var dataStack: DataStack!
+  public var cloudManager: CloudManager!
   
   // MARK: - Life Cycle
   
   convenience init() {
     self.init(nibName: "LoginVC", bundle: nil)
     dataStack = DataStack.sharedInstance
+    cloudManager = CloudManager.mainManager
   }
   
-  override func viewDidLoad() {
+  override public func viewDidLoad() {
     super.viewDidLoad()
     tokenTextView.text = Secrets.defaultAPIToken
   }
   
-  override func didReceiveMemoryWarning() {
+  override public func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
@@ -99,7 +104,7 @@ class LoginVC: UIViewController {
     
   }
   
-  @IBAction func nextButtonTap(sender: AnyObject) {
+  @IBAction public func nextButtonTap(sender: AnyObject) {
     switch nextButtonState {
     case .Idle:
       // Button is idle
@@ -107,7 +112,7 @@ class LoginVC: UIViewController {
       nextButtonState = .Loading
       animateNextButtonToState(nextButtonState)
       // Fetch team info
-      CloudManager.mainManager.requestTeamInfoWithToken(tokenTextView.text, completion: handleTeamResponse)
+      cloudManager.requestTeamInfoWithToken(tokenTextView.text, completion: handleTeamResponse)
     default:
       break
     }

@@ -11,7 +11,7 @@
 import UIKit
 import Alamofire
 
-enum CloudManagerConnectionStatus {
+public enum CloudManagerConnectionStatus {
   case OK
   case NotAuth
   case InvalidAuth
@@ -20,7 +20,7 @@ enum CloudManagerConnectionStatus {
   case UnknownFailure
 }
 
-class CloudManager: NSObject {
+public class CloudManager: NSObject {
   
   // MARK: - Constants
   
@@ -45,7 +45,7 @@ class CloudManager: NSObject {
   
   // MARK: - Life Cycle
   
-  override init() {
+  public override init() {
     super.init()
   }
   
@@ -57,7 +57,7 @@ class CloudManager: NSObject {
   // MARK: - Team resources
   
   // Requests Team's info using a provided <token> and calls <completion> upon completion
-  func requestTeamInfoWithToken(token: String, completion: (Team?, TeamDataStatus, CloudManagerConnectionStatus) -> Void) {
+  public func requestTeamInfoWithToken(token: String, completion: (Team?, TeamDataStatus, CloudManagerConnectionStatus) -> Void) {
     // Escape given token
     let safeToken = token.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)
     

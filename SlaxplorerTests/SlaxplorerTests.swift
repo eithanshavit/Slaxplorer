@@ -7,30 +7,82 @@
 //
 
 import UIKit
-import XCTest
+import Slaxplorer
+import Quick
+import Nimble
 
-class SlaxplorerTests: XCTestCase {
+class LoginVCSpec: QuickSpec {
+  
+  override func spec() {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
+    describe("LoginVC") {
+      
+      var loginVC: Slaxplorer.LoginVC!
+      
+      beforeEach {
+        loginVC = Slaxplorer.LoginVC()
+        loginVC.view.setNeedsLayout()
+        loginVC.view.layoutIfNeeded()
+      }
+      
+      it("should have a default token") {
+        expect(loginVC.tokenTextView.text).to(equal(Slaxplorer.Secrets.defaultAPIToken))
+      }
+        
+      context("handles responses from cloud") {
+        
+        var mockCM: MockCloudManager!
+        
+        class MockCloudManager: Slaxplorer.CloudManager {
+          var mocks: (team: Team?, dataStatus: TeamDataStatus, connectionStatus: CloudManagerConnectionStatus)!
+          private override func requestTeamInfoWithToken(token: String, completion: (Team?, TeamDataStatus, CloudManagerConnectionStatus) -> Void) {
+            completion(mocks.team, mocks.dataStatus, mocks.connectionStatus)
+          }
         }
+        
+        beforeEach {
+          mockCM = MockCloudManager()
+          loginVC.cloudManager = mockCM
+        }
+        
+        it("should handle account inactive") {
+          mockCM.mocks = (nil, .AccountInactive, .OK)
+          loginVC.nextButtonTap(NSObject())
+          expect(loginVC.promptLabel.text).to(equal("The team you're interested in was deleted"))
+        }
+        
+        it("should handle not authed") {
+          mockCM.mocks = (nil, .Unknown, .NotAuth)
+          loginVC.nextButtonTap(NSObject())
+          expect(loginVC.promptLabel.text).to(equal("Apologies, no access token was provided"))
+        }
+        
+        it("should handle invalid auth") {
+          mockCM.mocks = (nil, .Unknown, .InvalidAuth)
+          loginVC.nextButtonTap(NSObject())
+          expect(loginVC.promptLabel.text).to(equal("Apologies, invalid access token was provided"))
+        }
+        
+        it("should handle connection failure") {
+          mockCM.mocks = (nil, .Unknown, .ConnectionFailure)
+          loginVC.nextButtonTap(NSObject())
+          expect(loginVC.promptLabel.text).to(equal("Apologies, unable to connect at the moment"))
+        }
+        
+        it("should handle parse failure") {
+          mockCM.mocks = (nil, .Unknown, .ParseFailure)
+          loginVC.nextButtonTap(NSObject())
+          expect(loginVC.promptLabel.text).to(equal("Apologies, unable to get data from web"))
+        }
+        
+        it("should handle unknown failure") {
+          mockCM.mocks = (nil, .Unknown, .UnknownFailure)
+          loginVC.nextButtonTap(NSObject())
+          expect(loginVC.promptLabel.text).to(equal("Hmmm, something happened, but I'm not sure what"))
+        }
+        
+      }
+      
     }
-    
+  }
 }

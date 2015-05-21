@@ -13,6 +13,7 @@ class TeamListTableVC: UIViewController {
   // MARK: - State
   
   // MARK: Outlets
+  @IBOutlet weak var loaderContainer: UIView!
   @IBOutlet weak var teamNameLabel: UILabel!
   @IBOutlet weak var tableView: UITableView!
   
@@ -50,6 +51,8 @@ class TeamListTableVC: UIViewController {
     // Set title
     teamNameLabel.text = team.name
     
+    // Show/hide loader
+    showLoader(fetchedResultsController.fetchedObjects!.count == 0, animated: false)
     
   }
   
@@ -61,6 +64,26 @@ class TeamListTableVC: UIViewController {
   // MARK: - Actions
   
   @IBAction func logoutButtonTap(sender: AnyObject) {
+  }
+  
+  // MARK: - Loader
+  func showLoader(show: Bool, animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(
+        0.2,
+        delay: 0,
+        options: UIViewAnimationOptions.CurveEaseIn,
+        animations: {
+          () -> Void in
+          self.loaderContainer.alpha = show ? 1 : 0
+        },
+        completion: {
+          (Bool) -> Void in
+        })
+    } else {
+      self.loaderContainer.alpha = show ? 1 : 0
+    }
+  
   }
   
   // MARK: - FetchedResultsController
@@ -89,15 +112,6 @@ class TeamListTableVC: UIViewController {
 
 // MARK: - UITableViewDelegate
 extension TeamListTableVC: UITableViewDelegate {
-  
-  func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-    let count = fetchedResultsController.fetchedObjects!.count
-    if count == 0 {
-      // No data yet, return 'empty' cell height
-      return 300
-    }
-    return 80
-  }
   
 }
 

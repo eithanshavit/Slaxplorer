@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TeamListTableVC" customModule="Slaxplorer" customModuleProvider="target">
             <connections>
+                <outlet property="loaderContainer" destination="gkk-xl-hMB" id="b35-0Y-3dB"/>
                 <outlet property="tableView" destination="1yU-IY-8bz" id="EnZ-hd-hIg"/>
                 <outlet property="teamNameLabel" destination="j5r-2c-pH7" id="SeC-PA-TzM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="YCU-Wp-fQj"/>
@@ -60,21 +61,54 @@
                     <rect key="frame" x="0.0" y="89" width="375" height="518"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gkk-xl-hMB" userLabel="loaderContainer">
+                    <rect key="frame" x="0.0" y="89" width="375" height="518"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sadsmily" translatesAutoresizingMaskIntoConstraints="NO" id="8J4-h4-lPr" userLabel="smilyImageView">
+                            <rect key="frame" x="115" y="146" width="146" height="146"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="146" id="gxI-gE-BdX"/>
+                                <constraint firstAttribute="width" constant="146" id="u6b-Jh-vaw"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no data yet. but we're working on it!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0s-hm-fuC" userLabel="loaderTitle">
+                            <rect key="frame" x="50" y="312" width="275" height="52"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="22"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="G0s-hm-fuC" firstAttribute="top" secondItem="8J4-h4-lPr" secondAttribute="bottom" constant="20" id="4Ip-4m-KB1"/>
+                        <constraint firstItem="G0s-hm-fuC" firstAttribute="leading" secondItem="gkk-xl-hMB" secondAttribute="leading" constant="50" id="5lr-oI-G2A"/>
+                        <constraint firstAttribute="trailing" secondItem="G0s-hm-fuC" secondAttribute="trailing" constant="50" id="JPs-eu-WHw"/>
+                        <constraint firstAttribute="centerY" secondItem="8J4-h4-lPr" secondAttribute="centerY" constant="40" id="lcC-Mi-ZvU"/>
+                        <constraint firstAttribute="centerX" secondItem="8J4-h4-lPr" secondAttribute="centerX" id="tyU-VQ-v7g"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="1yU-IY-8bz" firstAttribute="centerX" secondItem="gkk-xl-hMB" secondAttribute="centerX" id="0Al-n3-9VE"/>
                 <constraint firstItem="1yU-IY-8bz" firstAttribute="top" secondItem="yB3-PB-NX6" secondAttribute="bottom" id="0Nb-Vl-kih"/>
                 <constraint firstItem="nTg-ad-xXS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="12h-qi-Cmc"/>
                 <constraint firstItem="yB3-PB-NX6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="De1-fG-n4N"/>
                 <constraint firstItem="1yU-IY-8bz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="FVJ-XP-sIW"/>
+                <constraint firstItem="1yU-IY-8bz" firstAttribute="width" secondItem="gkk-xl-hMB" secondAttribute="width" id="NYZ-k6-CHT"/>
                 <constraint firstAttribute="trailing" secondItem="nTg-ad-xXS" secondAttribute="trailing" id="OwT-EW-SP2"/>
                 <constraint firstItem="nTg-ad-xXS" firstAttribute="top" secondItem="1yU-IY-8bz" secondAttribute="bottom" id="U4E-nY-PAK"/>
+                <constraint firstItem="1yU-IY-8bz" firstAttribute="height" secondItem="gkk-xl-hMB" secondAttribute="height" id="bgV-hL-PEZ"/>
                 <constraint firstAttribute="trailing" secondItem="1yU-IY-8bz" secondAttribute="trailing" id="dO4-gW-hAL"/>
                 <constraint firstItem="yB3-PB-NX6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="kw6-x1-EgS"/>
                 <constraint firstAttribute="bottom" secondItem="nTg-ad-xXS" secondAttribute="bottom" id="oiM-5z-Wfj"/>
+                <constraint firstItem="1yU-IY-8bz" firstAttribute="centerY" secondItem="gkk-xl-hMB" secondAttribute="centerY" id="rtr-y0-gej"/>
                 <constraint firstAttribute="trailing" secondItem="yB3-PB-NX6" secondAttribute="trailing" id="rzQ-Ty-Ral"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
         </view>
     </objects>
+    <resources>
+        <image name="sadsmily" width="146" height="146"/>
+    </resources>
 </document>

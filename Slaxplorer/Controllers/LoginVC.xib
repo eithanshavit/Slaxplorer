@@ -21,35 +21,35 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="WYp-th-MmT" userLabel="logoImageView">
-                    <rect key="frame" x="53" y="50" width="270" height="59"/>
+                    <rect key="frame" x="53" y="45" width="270" height="59"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="WYp-th-MmT" secondAttribute="height" multiplier="143:31" id="y1D-rr-BdD"/>
                     </constraints>
                 </imageView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r7G-14-9mC" userLabel="inputContainer">
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r7G-14-9mC" userLabel="inputContainer">
                     <rect key="frame" x="53" y="201" width="270" height="266"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="token_bg" translatesAutoresizingMaskIntoConstraints="NO" id="b80-Zx-p5d" userLabel="inputBoxBGImageView">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="token_bg" translatesAutoresizingMaskIntoConstraints="NO" id="b80-Zx-p5d" userLabel="inputBoxBGImageView">
                             <rect key="frame" x="0.0" y="60" width="270" height="146"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="146" id="ROD-BB-03I"/>
                             </constraints>
                         </imageView>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2Ce-xf-yLC" userLabel="tokenTextView">
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2Ce-xf-yLC" userLabel="tokenTextView">
                             <rect key="frame" x="10" y="70" width="250" height="126"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="textColor" red="0.58039215686274515" green="0.58039215686274515" blue="0.58039215686274515" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="29"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                         </textView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We're using a test access token. Or, you can use your own. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vVn-Bi-9xs" userLabel="tokenLabel">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="We're using a default access token. Or, you can use your own. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vVn-Bi-9xs" userLabel="tokenLabel">
                             <rect key="frame" x="0.0" y="0.0" width="270" height="42"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GY2-Cd-6Jy" userLabel="clipboardButton">
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GY2-Cd-6Jy" userLabel="clipboardButton">
                             <rect key="frame" x="45" y="224" width="180" height="42"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="180" id="CWV-Nn-Sye"/>
@@ -63,10 +63,10 @@
                                 <action selector="clipboardButtonTap:" destination="-1" eventType="touchUpInside" id="W2x-I5-i9y"/>
                             </connections>
                         </button>
-                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEZ-ne-bXi" userLabel="promptContainer">
+                        <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sEZ-ne-bXi" userLabel="promptContainer">
                             <rect key="frame" x="0.0" y="0.0" width="270" height="266"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3KS-p2-9CF" userLabel="promptButton">
+                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3KS-p2-9CF" userLabel="promptButton">
                                     <rect key="frame" x="0.0" y="216" width="270" height="50"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
@@ -81,11 +81,11 @@
                                         <action selector="promptButtonTap:" destination="-1" eventType="touchUpInside" id="vok-hb-8dp"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apologies, we're unable to connect at the moment" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="I9a-2J-UoR" userLabel="promptLabel">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Apologies, we're unable to connect at the moment" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="I9a-2J-UoR" userLabel="promptLabel">
                                     <rect key="frame" x="15" y="15" width="240" height="186"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="25"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -146,7 +146,7 @@
                 <constraint firstAttribute="bottom" secondItem="tzU-aV-3LP" secondAttribute="bottom" id="FmK-7c-gBv"/>
                 <constraint firstAttribute="centerX" secondItem="r7G-14-9mC" secondAttribute="centerX" id="K3E-VR-1Zr"/>
                 <constraint firstAttribute="centerX" secondItem="WYp-th-MmT" secondAttribute="centerX" id="L7j-iR-a7a"/>
-                <constraint firstItem="WYp-th-MmT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="RUx-gv-hBb"/>
+                <constraint firstItem="WYp-th-MmT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="45" id="RUx-gv-hBb"/>
                 <constraint firstItem="b80-Zx-p5d" firstAttribute="width" secondItem="WYp-th-MmT" secondAttribute="width" id="Xfz-WH-CFU"/>
                 <constraint firstAttribute="trailing" secondItem="tzU-aV-3LP" secondAttribute="trailing" id="m3S-zp-Vgy"/>
                 <constraint firstItem="tzU-aV-3LP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wYh-ca-qMW"/>

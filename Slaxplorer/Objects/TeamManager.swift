@@ -19,10 +19,36 @@ class TeamManager: NSObject {
     }
     
     // Create or update a Team from temporary team
+    var team: Team!
     
-    // Log in
-    //team.loggedIn = true
-    return Team()
+    // See if team with already exists
+    let fetchRequest = NSFetchRequest(entityName: Team.entityName())
+    let resultPredicate = NSPredicate(format: "id == %@", tempTeam.id)
+    var error: NSError?
+    if let results = dataStack.managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as? [Team] {
+      switch results.count {
+      case 0:
+        // Create a new Team
+        team = NSEntityDescription.insertNewObjectForEntityForName(Team.entityName(), inManagedObjectContext: dataStack.managedObjectContext) as! Team
+        team.id = tempTeam.id
+      case 1:
+        team = results.first
+      default:
+        assertionFailure("There must be at most 1 team with ID \(tempTeam.id)")
+      }
+    } else {
+      println("Could not fetch \(error!), \(error!.userInfo)")
+      assertionFailure("Could not fetch")
+    }
+    
+    // Update team
+    team.loggedIn = true
+    team.name = tempTeam.name
+    team.token = tempTeam.token
+    
+    dataStack.saveMainContext()
+    
+    return team
   }
   
   // Fetch logged in team if exists
@@ -43,7 +69,7 @@ class TeamManager: NSObject {
       }
     } else {
       println("Could not fetch \(error!), \(error!.userInfo)")
-      assertionFailure("There must be at most 1 logged-in team")
+      assertionFailure("Could not fetch")
     }
     assertionFailure("Not a valid code path")
     return nil

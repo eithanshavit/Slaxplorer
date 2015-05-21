@@ -11,6 +11,6 @@
 
 public struct TempTeam {
   let id: String
-  let username: String
+  let name: String
   let token: String
 }

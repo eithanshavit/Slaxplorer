@@ -128,7 +128,7 @@ public class CloudManager: NSObject {
   private func createTempTeamWithData(data: AnyObject, token: String) -> TempTeam {
     let id = data.valueForKey("id") as! String
     let name = data.valueForKey("name") as! String
-    return TempTeam(id: id, username: name, token: token)
+    return TempTeam(id: id, name: name, token: token)
   }
   
   /*

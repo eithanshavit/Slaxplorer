@@ -11,6 +11,8 @@
 
 import UIKit
 
+let LoginTeamLoggedOutNotification = "LoginTeamLoggedOutNotification"
+
 public class LoginVC: UIViewController {
   
   // MARK: - State
@@ -45,6 +47,13 @@ public class LoginVC: UIViewController {
     self.init(nibName: "LoginVC", bundle: nil)
     dataStack = DataStack.sharedInstance
     cloudManager = CloudManager.mainManager
+    
+    // Register for logout notification
+    NSNotificationCenter.defaultCenter().addObserver(
+      self,
+      selector: "loggedOut:",
+      name: LoginTeamLoggedOutNotification,
+      object: nil)
   }
   
   override public func viewDidLoad() {
@@ -60,11 +69,11 @@ public class LoginVC: UIViewController {
   // MARK: - Next button
   
   // Animates the next button to a desired NextButtonState
-  private func animateNextButtonToState(state: NextButtonState) {
+  private func changeNextButtonToState(state: NextButtonState, animated: Bool) {
     switch state {
     case .Loading:
       UIView.animateWithDuration(
-        0.3,
+        animated ? 0.3 : 0,
         delay: 0,
         options: UIViewAnimationOptions.CurveEaseIn,
         animations: {
@@ -78,7 +87,7 @@ public class LoginVC: UIViewController {
         })
     case .Idle:
       UIView.animateWithDuration(
-        0.3,
+        animated ? 0.3 : 0,
         delay: 0,
         options: UIViewAnimationOptions.CurveEaseIn,
         animations: {
@@ -90,10 +99,9 @@ public class LoginVC: UIViewController {
           (Bool) -> Void in
           self.nextButton.enabled = true
         })
-      break
     case .Error:
       UIView.animateWithDuration(
-        0.3,
+        animated ? 0.3 : 0,
         delay: 0,
         options: UIViewAnimationOptions.CurveEaseIn,
         animations: {
@@ -105,7 +113,6 @@ public class LoginVC: UIViewController {
           (Bool) -> Void in
           self.nextButton.enabled = false
         })
-      break
     }
     
   }
@@ -116,7 +123,7 @@ public class LoginVC: UIViewController {
       // Button is idle
       // Switch to Loading
       nextButtonState = .Loading
-      animateNextButtonToState(nextButtonState)
+      changeNextButtonToState(nextButtonState, animated: true)
       // Fetch team info
       cloudManager.requestTeamInfoWithToken(tokenTextView.text, completion: handleTeamResponse)
     default:
@@ -179,7 +186,7 @@ public class LoginVC: UIViewController {
   
   @IBAction func promptButtonTap(sender: AnyObject) {
     nextButtonState = .Idle
-    animateNextButtonToState(nextButtonState)
+    changeNextButtonToState(nextButtonState, animated: true)
     hidePrompt()
   }
   
@@ -220,7 +227,14 @@ public class LoginVC: UIViewController {
   private func showError(text: String) {
     showPrompt(text)
     nextButtonState = .Error
-    animateNextButtonToState(nextButtonState)
+    changeNextButtonToState(nextButtonState, animated: true)
   }
   
+  // MARK: - Log out
+  func loggedOut(notification: NSNotification) {
+    nextButtonState = .Idle
+    changeNextButtonToState(nextButtonState, animated: false)
+    hidePrompt()
+  }
+
 }

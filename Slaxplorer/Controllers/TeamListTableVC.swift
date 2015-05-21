@@ -75,6 +75,10 @@ class TeamListTableVC: UIViewController {
   // MARK: - Actions
   
   @IBAction func logoutButtonTap(sender: AnyObject) {
+    // Logout team and dismiss VC
+    DataManager.mainManager.logOutActiveTeam()
+    NSNotificationCenter.defaultCenter().postNotificationName(LoginTeamLoggedOutNotification, object: nil)
+    navigationController?.popViewControllerAnimated(true)
   }
   
   // MARK: - Loader

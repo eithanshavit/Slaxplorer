@@ -42,6 +42,7 @@ class DataStack: NSObject {
   func contextDidSavePrivateQueueContext(notification: NSNotification) {
     dispatch_sync(lockQueue) {
       self.managedObjectContext?.performBlock {
+        println("DataStack: Merging to Main MOC")
         self.managedObjectContext?.mergeChangesFromContextDidSaveNotification(notification)
       }
     }
@@ -51,6 +52,7 @@ class DataStack: NSObject {
   func contextDidSaveMainQueueContext(notification: NSNotification) {
     dispatch_sync(lockQueue) {
       self.backgroundManagedObjectContext?.performBlock {
+        println("DataStack: Merging to Background MOC")
         self.backgroundManagedObjectContext?.mergeChangesFromContextDidSaveNotification(notification)
       }
     }
@@ -126,7 +128,7 @@ class DataStack: NSObject {
       if moc.hasChanges && !moc.save(&error) {
         // We are not currently focusing on optimizing Core Data. 
         // Error handling support will be added in the future
-        NSLog("Unresolved error \(error), \(error!.userInfo)")
+        NSLog("Unresolved error \(error)")
         abort()
       }
     }
@@ -138,7 +140,7 @@ class DataStack: NSObject {
       if moc.hasChanges && !moc.save(&error) {
         // We are not currently focusing on optimizing Core Data. 
         // Error handling support will be added in the future
-        NSLog("Unresolved error \(error), \(error!.userInfo)")
+        NSLog("Unresolved error \(error)")
         abort()
       }
     }

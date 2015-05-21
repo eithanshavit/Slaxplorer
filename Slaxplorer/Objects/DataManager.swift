@@ -73,6 +73,16 @@ public class DataManager: NSObject {
     return team
   }
   
+  // Log out current team
+  // Note: Wheter we should maintain the team's data in CoreData is up to the app's
+  // usage patterns. In this case and due to the small amount of data, I'm keeping the data intact.
+  func logOutActiveTeam() {
+    if let team = loggedInTeam() {
+      team.loggedIn = false
+      dataStack.saveMainContext()
+    }
+  }
+  
   // Fetch logged in team if exists
   func loggedInTeam() -> Team? {
     

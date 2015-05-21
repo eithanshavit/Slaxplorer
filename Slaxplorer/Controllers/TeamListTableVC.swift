@@ -68,7 +68,7 @@ class TeamListTableVC: UIViewController {
   }
   
   // Handle response from team member list request
-  private func handleMembersResponse(team: [TempMember]?, memberListDataStatus: MemberListDataStatus, connectionStatus: CloudManagerConnectionStatus) {
+  private func handleMembersResponse(members: [TempMember]?, memberListDataStatus: MemberListDataStatus, connectionStatus: CloudManagerConnectionStatus) {
   }
   
   // MARK: - Actions

@@ -12,11 +12,11 @@
 public struct TempMember {
   let id: String
   let username: String
-  let isActive: Bool?
+  let isActive: Bool
   let isAdmin: Bool
   let isOwner: Bool
-  let image48Url: String
-  let image192Url: String
+  let image48URL: String
+  let image192URL: String
   let optFirstName: String?
   let optLastName: String?
   let optRealName: String?

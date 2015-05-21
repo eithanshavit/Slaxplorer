@@ -10,6 +10,7 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 public enum CloudManagerConnectionStatus {
   case OK
@@ -75,7 +76,7 @@ public class CloudManager: NSObject {
       .request(.GET, URLTeamInfo, parameters: params)
       .validate(statusCode: 200..<201)
       .responseJSON {
-        (_: NSURLRequest, _: NSHTTPURLResponse?, data: AnyObject?, error: NSError?) -> Void in
+        (_: NSURLRequest, _: NSHTTPURLResponse?, json: AnyObject?, error: NSError?) -> Void in
         // Handle error
         if error != nil {
           // Error occurred
@@ -83,8 +84,10 @@ public class CloudManager: NSObject {
           completion(nil, .Unknown, .ConnectionFailure)
           return
         }
+        let data = JSON(json!)
+        
         // Check for OK status
-        let resOK = data?.valueForKey("ok") as? Bool
+        let resOK = data["ok"].bool
         if resOK == nil {
           // Unable to parse OK response
           completion(nil, .Unknown, .ParseFailure)
@@ -92,17 +95,18 @@ public class CloudManager: NSObject {
         }
         if resOK! {
           // Response ok, create Team
-          let resTeam: AnyObject? = data?.valueForKey("team")
-          if resTeam == nil {
+          let resId = data["team"]["id"].string
+          let resName = data["team"]["name"].string
+          if resId != nil && resName != nil {
+            completion(TempTeam(id: resId!, name: resName!, token: safeToken!), .OK, .OK)
+          } else {
             // Unable to parse team response
             completion(nil, .Unknown, .ParseFailure)
             return
           }
-          let team = self.createTempTeamWithData(resTeam!, token: safeToken!)
-          completion(team, .OK, .OK)
         } else {
           // Response not ok, figure out why
-          let resError = data?.valueForKey("error") as? String
+          let resError = data["error"].string
           if resError == nil {
             // Unable to parse Error in response
             completion(nil, .Unknown, .ParseFailure)
@@ -124,13 +128,6 @@ public class CloudManager: NSObject {
       }
   }
   
-  // Creates a new TempTeam with provided <data> and <token>
-  private func createTempTeamWithData(data: AnyObject, token: String) -> TempTeam {
-    let id = data.valueForKey("id") as! String
-    let name = data.valueForKey("name") as! String
-    return TempTeam(id: id, name: name, token: token)
-  }
-  
   // MARK: - Member resources
   
   // Requests user list of <team> and calls <completion> upon completion
@@ -144,7 +141,7 @@ public class CloudManager: NSObject {
       .request(.GET, URLUsersList, parameters: params)
       .validate(statusCode: 200..<201)
       .responseJSON {
-        (_: NSURLRequest, _: NSHTTPURLResponse?, data: AnyObject?, error: NSError?) -> Void in
+        (_: NSURLRequest, _: NSHTTPURLResponse?, json: AnyObject?, error: NSError?) -> Void in
         // Handle error
         if error != nil {
           // Error occurred
@@ -152,8 +149,10 @@ public class CloudManager: NSObject {
           completion(nil, .Unknown, .ConnectionFailure)
           return
         }
+        let data = JSON(json!)
+        
         // Check for OK status
-        let resOK = data?.valueForKey("ok") as? Bool
+        let resOK = data["ok"].bool
         if resOK == nil {
           // Unable to parse OK response
           completion(nil, .Unknown, .ParseFailure)
@@ -161,18 +160,18 @@ public class CloudManager: NSObject {
         }
         if resOK! {
           // Response ok, create Team
-          let resMembers: AnyObject? = data?.valueForKey("members")
+          let resMembers = data["members"]
           if resMembers == nil {
             // Unable to parse team response
             completion(nil, .Unknown, .ParseFailure)
             return
           }
-          let members = self.createTempMembersWithData(resMembers!)
+          let members = self.createTempMembersWithJSON(resMembers)
           completion(members, .OK, .OK)
           
         } else {
           // Response not ok, figure out why
-          let resError = data?.valueForKey("error") as? String
+          let resError = data["error"].string
           if resError == nil {
             // Unable to parse Error in response
             completion(nil, .Unknown, .ParseFailure)
@@ -192,8 +191,27 @@ public class CloudManager: NSObject {
     }
   }
   
-  private func createTempMembersWithData(data: AnyObject) -> [TempMember] {
+  private func createTempMembersWithJSON(data: JSON) -> [TempMember] {
     var ret = [TempMember]()
+    for (index: String, member: JSON) in data {
+      // This next block seems scary. But it's all protected by SwiftyJSON.
+      // Any optional values coming from the cloud will be registered as Swift optionals.
+      let member = TempMember(
+        id: member["id"].stringValue,
+        username: member["name"].stringValue,
+        isActive: !member["deleted"].boolValue,
+        isAdmin: member["is_admin"].boolValue,
+        isOwner: member["is_owner"].boolValue,
+        image48URL: member["profile"]["image_48"].stringValue,
+        image192URL: member["profile"]["image_192"].stringValue,
+        optFirstName: member["profile"]["first_name"].string,
+        optLastName: member["profile"]["last_name"].string,
+        optRealName: member["profile"]["real_name"].string,
+        optEmail: member["profile"]["email"].string
+      )
+      ret.append(member)
+    }
+    
     return ret
   }
   

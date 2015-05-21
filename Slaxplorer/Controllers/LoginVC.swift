@@ -23,6 +23,12 @@ public class LoginVC: UIViewController {
   @IBOutlet public weak var tokenTextView: UITextView!
   
   // MARK: General
+  enum ClipboardButtonState {
+    case Clipboard
+    case Default
+  }
+  var clipboardButtonState = ClipboardButtonState.Clipboard
+  
   enum NextButtonState {
     case Idle
     case Loading
@@ -155,8 +161,18 @@ public class LoginVC: UIViewController {
   // MARK: - Clipboard
   
   @IBAction func clipboardButtonTap(sender: AnyObject) {
-    // Populate token text view with clipboard content
-    tokenTextView.text = UIPasteboard.generalPasteboard().string
+    switch clipboardButtonState {
+    case .Clipboard:
+      // Populate token text view with clipboard content
+      tokenTextView.text = UIPasteboard.generalPasteboard().string
+      clipboardButtonState = .Default
+      clipboardButton.setTitle("default token", forState: UIControlState.Normal)
+    case .Default:
+      // Populate token text view with default content
+      tokenTextView.text = Secrets.defaultAPIToken
+      clipboardButtonState = .Clipboard
+      clipboardButton.setTitle("paste from clipboard", forState: UIControlState.Normal)
+    }
   }
   
   // MARK: - Prompt Pop

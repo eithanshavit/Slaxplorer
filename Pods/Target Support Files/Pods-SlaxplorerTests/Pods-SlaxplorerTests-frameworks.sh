@@ -52,6 +52,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'FastImageCache.framework'
   install_framework 'Nimble.framework'
   install_framework 'Quick.framework'
+  install_framework 'SwiftyJSON.framework'
   install_framework 'pop.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -59,5 +60,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'FastImageCache.framework'
   install_framework 'Nimble.framework'
   install_framework 'Quick.framework'
+  install_framework 'SwiftyJSON.framework'
   install_framework 'pop.framework'
 fi

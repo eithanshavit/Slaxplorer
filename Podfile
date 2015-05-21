@@ -10,6 +10,7 @@ inhibit_all_warnings!
 pod 'pop', '1.0.7'
 pod 'FastImageCache', '1.3'
 pod 'Alamofire', '1.2.2'
+pod "SwiftyJSON", "2.2.0"
 
 target 'SlaxplorerTests' do
   use_frameworks!

@@ -9,7 +9,7 @@
 // Struct to hold data of a temporary member before
 // it goes into persistent storage (Core Data)
 
-struct TempMember {
+public struct TempMember {
   let id: String
   let username: String
   let isActive: Bool?

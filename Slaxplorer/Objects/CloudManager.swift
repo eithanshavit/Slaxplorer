@@ -75,7 +75,7 @@ public class CloudManager: NSObject {
       .request(.GET, URLTeamInfo, parameters: params)
       .validate(statusCode: 200..<201)
       .responseJSON {
-        (_: NSURLRequest, response: NSHTTPURLResponse?, data: AnyObject?, error: NSError?) -> Void in
+        (_: NSURLRequest, _: NSHTTPURLResponse?, data: AnyObject?, error: NSError?) -> Void in
         // Handle error
         if error != nil {
           // Error occurred
@@ -131,11 +131,10 @@ public class CloudManager: NSObject {
     return TempTeam(id: id, name: name, token: token)
   }
   
-  /*
   // MARK: - Member resources
   
   // Requests user list of <team> and calls <completion> upon completion
-  public func requestTeamMemberList(team: Team, completion: (Team?, TeamDataStatus, CloudManagerConnectionStatus) -> Void) {
+  public func requestTeamMemberList(team: Team, completion: ([TempMember]?, MemberListDataStatus, CloudManagerConnectionStatus) -> Void) {
     
     // Request from web
     let params = [
@@ -145,7 +144,7 @@ public class CloudManager: NSObject {
       .request(.GET, URLUsersList, parameters: params)
       .validate(statusCode: 200..<201)
       .responseJSON {
-        (_: NSURLRequest, response: NSHTTPURLResponse?, data: AnyObject?, error: NSError?) -> Void in
+        (_: NSURLRequest, _: NSHTTPURLResponse?, data: AnyObject?, error: NSError?) -> Void in
         // Handle error
         if error != nil {
           // Error occurred
@@ -162,14 +161,15 @@ public class CloudManager: NSObject {
         }
         if resOK! {
           // Response ok, create Team
-          let resTeam: AnyObject? = data?.valueForKey("team")
-          if resTeam == nil {
+          let resMembers: AnyObject? = data?.valueForKey("members")
+          if resMembers == nil {
             // Unable to parse team response
             completion(nil, .Unknown, .ParseFailure)
             return
           }
-          let team = self.createTeamFromData(resTeam!)
-          completion(team, .OK, .OK)
+          let members = self.createTempMembersWithData(resMembers!)
+          completion(members, .OK, .OK)
+          
         } else {
           // Response not ok, figure out why
           let resError = data?.valueForKey("error") as? String
@@ -191,7 +191,11 @@ public class CloudManager: NSObject {
         }
     }
   }
-*/
+  
+  private func createTempMembersWithData(data: AnyObject) -> [TempMember] {
+    var ret = [TempMember]()
+    return ret
+  }
   
   
 }

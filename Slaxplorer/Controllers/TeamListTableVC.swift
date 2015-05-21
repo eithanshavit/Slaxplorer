@@ -52,11 +52,23 @@ class TeamListTableVC: UIViewController {
     // Show/hide loader
     showLoader(fetchedResultsController.fetchedObjects!.count == 0, animated: false)
     
+    // Finally, update data
+    updateData()
   }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
+  }
+  
+  // MARK: - Data
+  
+  func updateData() {
+    cloudManager.requestTeamMemberList(team, completion: handleMembersResponse)
+  }
+  
+  // Handle response from team member list request
+  private func handleMembersResponse(team: [TempMember]?, memberListDataStatus: MemberListDataStatus, connectionStatus: CloudManagerConnectionStatus) {
   }
   
   // MARK: - Actions

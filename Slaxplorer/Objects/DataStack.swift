@@ -102,7 +102,7 @@ class DataStack: NSObject {
     if coordinator == nil {
       return nil
     }
-    var managedObjectContext = NSManagedObjectContext()
+    var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
     managedObjectContext.persistentStoreCoordinator = coordinator
     return managedObjectContext
     }()

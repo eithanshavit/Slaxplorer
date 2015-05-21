@@ -4,17 +4,17 @@
 #import "_Member.h"
 
 const struct MemberAttributes MemberAttributes = {
-	.email = @"email",
-	.firstName = @"firstName",
 	.id = @"id",
-	.image192 = @"image192",
-	.image48 = @"image48",
+	.image192URL = @"image192URL",
+	.image48URL = @"image48URL",
 	.isActive = @"isActive",
 	.isAdmin = @"isAdmin",
 	.isOwner = @"isOwner",
-	.lastName = @"lastName",
 	.localColorNumber = @"localColorNumber",
-	.realName = @"realName",
+	.optEmail = @"optEmail",
+	.optFirstName = @"optFirstName",
+	.optLastName = @"optLastName",
+	.optRealName = @"optRealName",
 	.username = @"username",
 };
 
@@ -72,15 +72,11 @@ const struct MemberRelationships MemberRelationships = {
 	return keyPaths;
 }
 
-@dynamic email;
-
-@dynamic firstName;
-
 @dynamic id;
 
-@dynamic image192;
+@dynamic image192URL;
 
-@dynamic image48;
+@dynamic image48URL;
 
 @dynamic isActive;
 
@@ -142,8 +138,6 @@ const struct MemberRelationships MemberRelationships = {
 	[self setPrimitiveIsOwner:@(value_)];
 }
 
-@dynamic lastName;
-
 @dynamic localColorNumber;
 
 - (int16_t)localColorNumberValue {
@@ -164,7 +158,13 @@ const struct MemberRelationships MemberRelationships = {
 	[self setPrimitiveLocalColorNumber:@(value_)];
 }
 
-@dynamic realName;
+@dynamic optEmail;
+
+@dynamic optFirstName;
+
+@dynamic optLastName;
+
+@dynamic optRealName;
 
 @dynamic username;
 

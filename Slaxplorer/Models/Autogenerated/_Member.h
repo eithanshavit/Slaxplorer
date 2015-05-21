@@ -4,17 +4,17 @@
 @import CoreData;
 
 extern const struct MemberAttributes {
-	__unsafe_unretained NSString *email;
-	__unsafe_unretained NSString *firstName;
 	__unsafe_unretained NSString *id;
-	__unsafe_unretained NSString *image192;
-	__unsafe_unretained NSString *image48;
+	__unsafe_unretained NSString *image192URL;
+	__unsafe_unretained NSString *image48URL;
 	__unsafe_unretained NSString *isActive;
 	__unsafe_unretained NSString *isAdmin;
 	__unsafe_unretained NSString *isOwner;
-	__unsafe_unretained NSString *lastName;
 	__unsafe_unretained NSString *localColorNumber;
-	__unsafe_unretained NSString *realName;
+	__unsafe_unretained NSString *optEmail;
+	__unsafe_unretained NSString *optFirstName;
+	__unsafe_unretained NSString *optLastName;
+	__unsafe_unretained NSString *optRealName;
 	__unsafe_unretained NSString *username;
 } MemberAttributes;
 
@@ -33,25 +33,17 @@ extern const struct MemberRelationships {
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) MemberID* objectID;
 
-@property (nonatomic, strong) NSString* email;
-
-//- (BOOL)validateEmail:(id*)value_ error:(NSError**)error_;
-
-@property (nonatomic, strong) NSString* firstName;
-
-//- (BOOL)validateFirstName:(id*)value_ error:(NSError**)error_;
-
 @property (nonatomic, strong) NSString* id;
 
 //- (BOOL)validateId:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSString* image192;
+@property (nonatomic, strong) NSString* image192URL;
 
-//- (BOOL)validateImage192:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateImage192URL:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSString* image48;
+@property (nonatomic, strong) NSString* image48URL;
 
-//- (BOOL)validateImage48:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateImage48URL:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSNumber* isActive;
 
@@ -77,10 +69,6 @@ extern const struct MemberRelationships {
 
 //- (BOOL)validateIsOwner:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSString* lastName;
-
-//- (BOOL)validateLastName:(id*)value_ error:(NSError**)error_;
-
 @property (nonatomic, strong) NSNumber* localColorNumber;
 
 @property (atomic) int16_t localColorNumberValue;
@@ -89,9 +77,21 @@ extern const struct MemberRelationships {
 
 //- (BOOL)validateLocalColorNumber:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSString* realName;
+@property (nonatomic, strong) NSString* optEmail;
 
-//- (BOOL)validateRealName:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateOptEmail:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSString* optFirstName;
+
+//- (BOOL)validateOptFirstName:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSString* optLastName;
+
+//- (BOOL)validateOptLastName:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSString* optRealName;
+
+//- (BOOL)validateOptRealName:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSString* username;
 
@@ -105,20 +105,14 @@ extern const struct MemberRelationships {
 
 @interface _Member (CoreDataGeneratedPrimitiveAccessors)
 
-- (NSString*)primitiveEmail;
-- (void)setPrimitiveEmail:(NSString*)value;
-
-- (NSString*)primitiveFirstName;
-- (void)setPrimitiveFirstName:(NSString*)value;
-
 - (NSString*)primitiveId;
 - (void)setPrimitiveId:(NSString*)value;
 
-- (NSString*)primitiveImage192;
-- (void)setPrimitiveImage192:(NSString*)value;
+- (NSString*)primitiveImage192URL;
+- (void)setPrimitiveImage192URL:(NSString*)value;
 
-- (NSString*)primitiveImage48;
-- (void)setPrimitiveImage48:(NSString*)value;
+- (NSString*)primitiveImage48URL;
+- (void)setPrimitiveImage48URL:(NSString*)value;
 
 - (NSNumber*)primitiveIsActive;
 - (void)setPrimitiveIsActive:(NSNumber*)value;
@@ -138,17 +132,23 @@ extern const struct MemberRelationships {
 - (BOOL)primitiveIsOwnerValue;
 - (void)setPrimitiveIsOwnerValue:(BOOL)value_;
 
-- (NSString*)primitiveLastName;
-- (void)setPrimitiveLastName:(NSString*)value;
-
 - (NSNumber*)primitiveLocalColorNumber;
 - (void)setPrimitiveLocalColorNumber:(NSNumber*)value;
 
 - (int16_t)primitiveLocalColorNumberValue;
 - (void)setPrimitiveLocalColorNumberValue:(int16_t)value_;
 
-- (NSString*)primitiveRealName;
-- (void)setPrimitiveRealName:(NSString*)value;
+- (NSString*)primitiveOptEmail;
+- (void)setPrimitiveOptEmail:(NSString*)value;
+
+- (NSString*)primitiveOptFirstName;
+- (void)setPrimitiveOptFirstName:(NSString*)value;
+
+- (NSString*)primitiveOptLastName;
+- (void)setPrimitiveOptLastName:(NSString*)value;
+
+- (NSString*)primitiveOptRealName;
+- (void)setPrimitiveOptRealName:(NSString*)value;
 
 - (NSString*)primitiveUsername;
 - (void)setPrimitiveUsername:(NSString*)value;

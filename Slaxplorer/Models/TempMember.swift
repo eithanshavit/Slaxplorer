@@ -9,7 +9,7 @@
 // Struct to hold data of a temporary member before
 // it goes into persistent storage (Core Data)
 
-public struct TempMember {
+public struct TempMember: Printable {
   let id: String
   let username: String
   let isActive: Bool
@@ -21,4 +21,8 @@ public struct TempMember {
   let optLastName: String?
   let optRealName: String?
   let optEmail: String?
+  
+  public var description: String {
+    return "ID \(id): \(username)"
+  }
 }

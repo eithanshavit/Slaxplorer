@@ -30,6 +30,8 @@ public class DataManager: NSObject {
     super.init()
   }
   
+  // MARK: - Team Functionality
+  
   // Registers a temporary team to CoreData and sets it as logged-in
   func logInTemporaryTeam(tempTeam: TempTeam) -> Team {
     
@@ -95,9 +97,91 @@ public class DataManager: NSObject {
     return nil
   }
   
-  // Sync temp team members with local team
+  // MARK: - Members Functionality
+  
+  // Sync temp team members from cloud into local team
+  // Note: on iOS 8 we can enjoy using NSBatchUpdateRequest to efficiently update the team's members.
+  //       But in this case, the order of mangnitude of elements does not justify such complex optimization.
   func syncTeamWithTempMembers(team: Team, members: [TempMember]) {
+    // First fetch background Team object
+    let fetchRequest = NSFetchRequest(entityName: Team.entityName())
+    let resultPredicate = NSPredicate(format: "id == %@", team.id)
+    var error: NSError?
+    var localTeam: Team!
+    if let results = dataStack.backgroundManagedObjectContext.executeFetchRequest(fetchRequest, error: &error) as? [Team] {
+      switch results.count {
+      case 0:
+        // Should never happen
+        assertionFailure("Unable to find Team with provided Team \(team)")
+      case 1:
+        localTeam = results.first!
+      default:
+        assertionFailure("There must be at most 1 team with ID \(team.id)")
+      }
+    } else {
+      println("Could not fetch \(error!), \(error!.userInfo)")
+      assertionFailure("Could not fetch")
+    }
     
+    // Utility generic to convert an array to a dictionary with a given transformer
+    func toDictionary<E, K, V>(array: [E], transformer: (element: E) -> (key: K, value: V)?) -> Dictionary<K, V> {
+      return array.reduce([:]) {
+        (var dict, e) in
+        if let (key, value) = transformer(element: e) {
+          dict[key] = value
+        }
+        return dict
+      }
+    }
+    
+    // Form sets to figure out which team members need update, addition, or deletion
+    let idToMemberMap = toDictionary(Array(localTeam.members as! Set<Member>)) {($0.id, $0)}
+    let idToTempMemberMap = toDictionary(members) {($0.id, $0)}
+    let idSet = Set(Array(localTeam.members as! Set<Member>).map {$0.id})
+    let tempIDSet = Set(members.map {$0.id})
+    let idsToUpdate = tempIDSet.intersect(idSet)
+    let idsToDelete = idSet.subtract(tempIDSet)
+    let idsToAdd = tempIDSet.subtract(idSet)
+    
+    // Update existing members
+    for id in idsToUpdate {
+      let member = idToMemberMap[id]!
+      let tempMember = idToTempMemberMap[id]!
+      updateMemberWithTempMember(member, tempMember: tempMember)
+      println("UPDATING \(member) with \(tempMember)")
+    }
+    // Add new members
+    for id in idsToAdd {
+      let member = NSEntityDescription.insertNewObjectForEntityForName(Member.entityName(), inManagedObjectContext: dataStack.backgroundManagedObjectContext) as! Member
+      member.id = id
+      let tempMember = idToTempMemberMap[id]!
+      updateMemberWithTempMember(member, tempMember: tempMember)
+      localTeam!.addMembersObject(member)
+      println("ADDING \(tempMember)")
+    }
+    // Delete unnecessary members
+    for id in idsToDelete {
+      let member = idToMemberMap[id]!
+      localTeam.removeMembersObject(member)
+      println("DELETING \(member)")
+    }
+    
+    // Phew... Now save the background context
+    dataStack.saveBackgroundContext()
+  }
+  
+  // Updates a local Member object with properties from a TempMember object.
+  private func updateMemberWithTempMember(member: Member, tempMember: TempMember) {
+    member.username = tempMember.username
+    member.isActive = tempMember.isActive
+    member.isAdmin = tempMember.isAdmin
+    member.isOwner = tempMember.isOwner
+    member.image48URL = tempMember.image48URL
+    member.image192URL = tempMember.image192URL
+    member.optFirstName = tempMember.optFirstName
+    member.optLastName = tempMember.optLastName
+    member.optRealName = tempMember.optRealName
+    member.optEmail = tempMember.optEmail
   }
 
 }

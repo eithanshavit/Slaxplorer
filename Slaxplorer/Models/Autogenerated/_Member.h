@@ -13,6 +13,7 @@ extern const struct MemberAttributes {
 	__unsafe_unretained NSString *isAdmin;
 	__unsafe_unretained NSString *isOwner;
 	__unsafe_unretained NSString *lastName;
+	__unsafe_unretained NSString *localColorNumber;
 	__unsafe_unretained NSString *realName;
 	__unsafe_unretained NSString *username;
 } MemberAttributes;
@@ -80,6 +81,14 @@ extern const struct MemberRelationships {
 
 //- (BOOL)validateLastName:(id*)value_ error:(NSError**)error_;
 
+@property (nonatomic, strong) NSNumber* localColorNumber;
+
+@property (atomic) int16_t localColorNumberValue;
+- (int16_t)localColorNumberValue;
+- (void)setLocalColorNumberValue:(int16_t)value_;
+
+//- (BOOL)validateLocalColorNumber:(id*)value_ error:(NSError**)error_;
+
 @property (nonatomic, strong) NSString* realName;
 
 //- (BOOL)validateRealName:(id*)value_ error:(NSError**)error_;
@@ -131,6 +140,12 @@ extern const struct MemberRelationships {
 
 - (NSString*)primitiveLastName;
 - (void)setPrimitiveLastName:(NSString*)value;
+
+- (NSNumber*)primitiveLocalColorNumber;
+- (void)setPrimitiveLocalColorNumber:(NSNumber*)value;
+
+- (int16_t)primitiveLocalColorNumberValue;
+- (void)setPrimitiveLocalColorNumberValue:(int16_t)value_;
 
 - (NSString*)primitiveRealName;
 - (void)setPrimitiveRealName:(NSString*)value;

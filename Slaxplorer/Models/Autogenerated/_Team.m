@@ -7,6 +7,7 @@ const struct TeamAttributes TeamAttributes = {
 	.id = @"id",
 	.loggedIn = @"loggedIn",
 	.name = @"name",
+	.token = @"token",
 };
 
 const struct TeamRelationships TeamRelationships = {
@@ -71,6 +72,8 @@ const struct TeamRelationships TeamRelationships = {
 }
 
 @dynamic name;
+
+@dynamic token;
 
 @dynamic members;
 

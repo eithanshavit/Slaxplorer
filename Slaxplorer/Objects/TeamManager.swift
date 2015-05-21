@@ -10,16 +10,19 @@ import Foundation
 
 class TeamManager: NSObject {
   
-  // Sets a Team as current
-  class func logInTeam(team: Team, dataStack: DataStack) {
+  // Registers a temporary team to CoreData and sets it as logged-in
+  class func logInTemporaryTeam(tempTeam: TempTeam, dataStack: DataStack) -> Team {
     
     // Log out current team
     if let loggedTeam = loggedInTeam(dataStack) {
       loggedTeam.loggedIn = false
     }
     
+    // Create or update a Team from temporary team
+    
     // Log in
-    team.loggedIn = true
+    //team.loggedIn = true
+    return Team()
   }
   
   // Fetch logged in team if exists

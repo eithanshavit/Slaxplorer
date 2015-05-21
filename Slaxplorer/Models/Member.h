@@ -1,5 +1,11 @@
 #import "_Member.h"
 
 @interface Member : _Member {}
-// Custom logic goes here.
+
+typedef NS_ENUM(NSInteger, MemberListDataStatus) {
+  MemberListDataStatusOK,
+  MemberListDataStatusAccountInactive,
+  MemberListDataStatusUnknown,
+};
+
 @end

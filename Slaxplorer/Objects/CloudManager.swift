@@ -57,13 +57,14 @@ public class CloudManager: NSObject {
   // MARK: - Team resources
   
   // Requests Team's info using a provided <token> and calls <completion> upon completion
-  public func requestTeamInfoWithToken(token: String, completion: (Team?, TeamDataStatus, CloudManagerConnectionStatus) -> Void) {
+  public func requestTeamInfoWithToken(token: String, completion: (TempTeam?, TeamDataStatus, CloudManagerConnectionStatus) -> Void) {
     // Escape given token
     let safeToken = token.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)
     
     if safeToken == nil {
       // Report error with escaping token
-      
+      completion(nil, .Unknown, .InvalidAuth)
+      return
     }
     
     // Request from web
@@ -72,6 +73,76 @@ public class CloudManager: NSObject {
     ]
     alamofireManager!
       .request(.GET, URLTeamInfo, parameters: params)
+      .validate(statusCode: 200..<201)
+      .responseJSON {
+        (_: NSURLRequest, response: NSHTTPURLResponse?, data: AnyObject?, error: NSError?) -> Void in
+        // Handle error
+        if error != nil {
+          // Error occurred
+          println(error)
+          completion(nil, .Unknown, .ConnectionFailure)
+          return
+        }
+        // Check for OK status
+        let resOK = data?.valueForKey("ok") as? Bool
+        if resOK == nil {
+          // Unable to parse OK response
+          completion(nil, .Unknown, .ParseFailure)
+          return
+        }
+        if resOK! {
+          // Response ok, create Team
+          let resTeam: AnyObject? = data?.valueForKey("team")
+          if resTeam == nil {
+            // Unable to parse team response
+            completion(nil, .Unknown, .ParseFailure)
+            return
+          }
+          let team = self.createTempTeamWithData(resTeam!, token: safeToken!)
+          completion(team, .OK, .OK)
+        } else {
+          // Response not ok, figure out why
+          let resError = data?.valueForKey("error") as? String
+          if resError == nil {
+            // Unable to parse Error in response
+            completion(nil, .Unknown, .ParseFailure)
+            return
+          }
+          switch resError! {
+          case "account_inactive":
+            completion(nil, .AccountInactive, .OK)
+          case "not_authed":
+            completion(nil, .Unknown, .NotAuth)
+          case "invalid_auth":
+            completion(nil, .Unknown, .InvalidAuth)
+          case "user_is_bot":
+            completion(nil, .UserIsBot, .OK)
+          default:
+            completion(nil, .Unknown, .UnknownFailure)
+          }
+        }
+      }
+  }
+  
+  // Creates a new TempTeam with provided <data> and <token>
+  private func createTempTeamWithData(data: AnyObject, token: String) -> TempTeam {
+    let id = data.valueForKey("id") as! String
+    let name = data.valueForKey("name") as! String
+    return TempTeam(id: id, username: name, token: token)
+  }
+  
+  /*
+  // MARK: - Member resources
+  
+  // Requests user list of <team> and calls <completion> upon completion
+  public func requestTeamMemberList(team: Team, completion: (Team?, TeamDataStatus, CloudManagerConnectionStatus) -> Void) {
+    
+    // Request from web
+    let params = [
+      "token": team.token
+    ]
+    alamofireManager!
+      .request(.GET, URLUsersList, parameters: params)
       .validate(statusCode: 200..<201)
       .responseJSON {
         (_: NSURLRequest, response: NSHTTPURLResponse?, data: AnyObject?, error: NSError?) -> Void in
@@ -118,14 +189,9 @@ public class CloudManager: NSObject {
             completion(nil, .Unknown, .UnknownFailure)
           }
         }
-      }
+    }
   }
+*/
   
-  // Creates a new Team managed object with provided <data>
-  private func createTeamFromData(data: AnyObject) -> Team {
-    let id = data.valueForKey("id") as! String
-    let name = data.valueForKey("name") as! String
-    return Team.createTeamWithID(id, name: name, inManagedObjectContext: dataStack.managedObjectContext)
-  }
   
 }

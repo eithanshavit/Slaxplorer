@@ -7,6 +7,7 @@ extern const struct TeamAttributes {
 	__unsafe_unretained NSString *id;
 	__unsafe_unretained NSString *loggedIn;
 	__unsafe_unretained NSString *name;
+	__unsafe_unretained NSString *token;
 } TeamAttributes;
 
 extern const struct TeamRelationships {
@@ -40,6 +41,10 @@ extern const struct TeamRelationships {
 
 //- (BOOL)validateName:(id*)value_ error:(NSError**)error_;
 
+@property (nonatomic, strong) NSString* token;
+
+//- (BOOL)validateToken:(id*)value_ error:(NSError**)error_;
+
 @property (nonatomic, strong) NSSet *members;
 
 - (NSMutableSet*)membersSet;
@@ -67,6 +72,9 @@ extern const struct TeamRelationships {
 
 - (NSString*)primitiveName;
 - (void)setPrimitiveName:(NSString*)value;
+
+- (NSString*)primitiveToken;
+- (void)setPrimitiveToken:(NSString*)value;
 
 - (NSMutableSet*)primitiveMembers;
 - (void)setPrimitiveMembers:(NSMutableSet*)value;

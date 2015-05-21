@@ -40,9 +40,7 @@ class TeamListTableVC: UIViewController {
     
     // Register cells
     for (nibName, reuseId) in [
-      ("TeamListDetailedTableViewCell", TeamListDetailedTableViewCell.reuseIdentifier),
-      ("TeamListConciseTableViewCell", TeamListConciseTableViewCell.reuseIdentifier),
-      ("TeamListEmptyTableViewCell", TeamListEmptyTableViewCell.reuseIdentifier),
+      ("TeamListTableViewCell", TeamListTableViewCell.reuseIdentifier),
     ] {
       let nib = UINib(nibName: nibName, bundle:nil)
       tableView.registerNib(nib, forCellReuseIdentifier: reuseId)
@@ -111,11 +109,13 @@ class TeamListTableVC: UIViewController {
 }
 
 // MARK: - UITableViewDelegate
+
 extension TeamListTableVC: UITableViewDelegate {
   
 }
 
 // MARK: - UITableViewDataSource
+
 extension TeamListTableVC: UITableViewDataSource {
   
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {

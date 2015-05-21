@@ -13,6 +13,7 @@ const struct MemberAttributes MemberAttributes = {
 	.isAdmin = @"isAdmin",
 	.isOwner = @"isOwner",
 	.lastName = @"lastName",
+	.localColorNumber = @"localColorNumber",
 	.realName = @"realName",
 	.username = @"username",
 };
@@ -59,6 +60,11 @@ const struct MemberRelationships MemberRelationships = {
 	}
 	if ([key isEqualToString:@"isOwnerValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"isOwner"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"localColorNumberValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"localColorNumber"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -137,6 +143,26 @@ const struct MemberRelationships MemberRelationships = {
 }
 
 @dynamic lastName;
+
+@dynamic localColorNumber;
+
+- (int16_t)localColorNumberValue {
+	NSNumber *result = [self localColorNumber];
+	return [result shortValue];
+}
+
+- (void)setLocalColorNumberValue:(int16_t)value_ {
+	[self setLocalColorNumber:@(value_)];
+}
+
+- (int16_t)primitiveLocalColorNumberValue {
+	NSNumber *result = [self primitiveLocalColorNumber];
+	return [result shortValue];
+}
+
+- (void)setPrimitiveLocalColorNumberValue:(int16_t)value_ {
+	[self setPrimitiveLocalColorNumber:@(value_)];
+}
 
 @dynamic realName;
 

@@ -10,6 +10,8 @@ import UIKit
 
 class TeamListTableViewCell: UITableViewCell {
   
+  static let reuseIdentifier = "TeamListTableViewCell"
+  
   override func awakeFromNib() {
     super.awakeFromNib()
     // Initialization code
@@ -20,19 +22,4 @@ class TeamListTableViewCell: UITableViewCell {
     
     // Configure the view for the selected state
   }
-  
-}
-
-class TeamListDetailedTableViewCell: TeamListTableViewCell {
-  static let reuseIdentifier = "TeamListDetailedTableViewCell"
-}
-
-class TeamListConciseTableViewCell: TeamListTableViewCell {
-  static let reuseIdentifier = "TeamListConciseTableViewCell"
-  
-}
-
-class TeamListEmptyTableViewCell: TeamListTableViewCell {
-  static let reuseIdentifier = "TeamListEmptyTableViewCell"
-  
 }

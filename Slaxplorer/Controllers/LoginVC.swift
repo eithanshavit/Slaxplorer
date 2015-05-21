@@ -121,12 +121,14 @@ public class LoginVC: UIViewController {
   // MARK: - Team
   
   // Handle response from team info request
-  private func handleTeamResponse(team: Team?, teamDataStatus: TeamDataStatus, connectionStatus: CloudManagerConnectionStatus) {
+  private func handleTeamResponse(team: TempTeam?, teamDataStatus: TeamDataStatus, connectionStatus: CloudManagerConnectionStatus) {
     switch (connectionStatus, teamDataStatus) {
     case (.OK, .OK):
       loginTeam(team!)
     case (.OK, .AccountInactive):
       showError("The team you're interested in was deleted")
+    case (.OK, .UserIsBot):
+      showError("It appears you are a robot")
     case (.OK, .Unknown), (.UnknownFailure, _):
       showError("Hmmm, something happened, but I'm not sure what")
     case (.NotAuth, _):
@@ -142,9 +144,8 @@ public class LoginVC: UIViewController {
     }
   }
   
-  private func loginTeam(team: Team) {
-    TeamManager.logInTeam(team, dataStack: dataStack)
-    dataStack.saveMainContext()
+  private func loginTeam(tempTeam: TempTeam) {
+    let team = TeamManager.logInTemporaryTeam(tempTeam, dataStack: dataStack)
     
     // Push TeamListTableVC
     let teamListVC = TeamListTableVC(team: team)

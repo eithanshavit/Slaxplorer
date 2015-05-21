@@ -34,8 +34,8 @@ class LoginVCSpec: QuickSpec {
         var mockCM: MockCloudManager!
         
         class MockCloudManager: Slaxplorer.CloudManager {
-          var mocks: (team: Team?, dataStatus: TeamDataStatus, connectionStatus: CloudManagerConnectionStatus)!
-          private override func requestTeamInfoWithToken(token: String, completion: (Team?, TeamDataStatus, CloudManagerConnectionStatus) -> Void) {
+          var mocks: (team: TempTeam?, dataStatus: TeamDataStatus, connectionStatus: CloudManagerConnectionStatus)!
+          private override func requestTeamInfoWithToken(token: String, completion: (TempTeam?, TeamDataStatus, CloudManagerConnectionStatus) -> Void) {
             completion(mocks.team, mocks.dataStatus, mocks.connectionStatus)
           }
         }
@@ -79,6 +79,12 @@ class LoginVCSpec: QuickSpec {
           mockCM.mocks = (nil, .Unknown, .UnknownFailure)
           loginVC.nextButtonTap(NSObject())
           expect(loginVC.promptLabel.text).to(equal("Hmmm, something happened, but I'm not sure what"))
+        }
+        
+        it("should handle robots") {
+          mockCM.mocks = (nil, .UserIsBot, .OK)
+          loginVC.nextButtonTap(NSObject())
+          expect(loginVC.promptLabel.text).to(equal("It appears you are a robot"))
         }
         
       }

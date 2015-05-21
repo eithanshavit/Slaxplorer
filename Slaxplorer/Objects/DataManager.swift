@@ -1,5 +1,5 @@
 //
-//  TeamManager.swift
+//  DataManager.swift
 //  Slaxplorer
 //
 //  Created by  Eithan Shavit on 5/19/15.
@@ -8,13 +8,33 @@
 
 import Foundation
 
-class TeamManager: NSObject {
+public class DataManager: NSObject {
+  
+  // MARK: - State
+  
+  var dataStack: DataStack!
+  
+  // MARK: - Main Instance
+  
+  // The main DataManager uses the shared DataStack.
+  // If needed, create different DataManagers with different configs
+  class var mainManager: DataManager {
+    var dm = DataManager()
+    dm.dataStack = DataStack.sharedInstance
+    return dm
+  }
+  
+  // MARK: - Life Cycle
+  
+  public override init() {
+    super.init()
+  }
   
   // Registers a temporary team to CoreData and sets it as logged-in
-  class func logInTemporaryTeam(tempTeam: TempTeam, dataStack: DataStack) -> Team {
+  func logInTemporaryTeam(tempTeam: TempTeam) -> Team {
     
     // Log out current team
-    if let loggedTeam = loggedInTeam(dataStack) {
+    if let loggedTeam = loggedInTeam() {
       loggedTeam.loggedIn = false
     }
     
@@ -52,7 +72,7 @@ class TeamManager: NSObject {
   }
   
   // Fetch logged in team if exists
-  class func loggedInTeam(dataStack: DataStack) -> Team? {
+  func loggedInTeam() -> Team? {
     
     // Fetch all loggedIn teams
     let fetchRequest = NSFetchRequest(entityName: Team.entityName())
@@ -73,6 +93,11 @@ class TeamManager: NSObject {
     }
     assertionFailure("Not a valid code path")
     return nil
+  }
+  
+  // Sync temp team members with local team
+  func syncTeamWithTempMembers(team: Team, members: [TempMember]) {
+    
   }
 
 }

@@ -93,7 +93,6 @@ class TeamListTableVC: UIViewController {
     } else {
       self.loaderContainer.alpha = show ? 1 : 0
     }
-  
   }
   
   // MARK: - FetchedResultsController

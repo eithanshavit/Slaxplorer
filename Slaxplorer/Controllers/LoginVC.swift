@@ -151,7 +151,7 @@ public class LoginVC: UIViewController {
   }
   
   private func loginTeam(tempTeam: TempTeam) {
-    let team = TeamManager.logInTemporaryTeam(tempTeam, dataStack: dataStack)
+    let team = DataManager.mainManager.logInTemporaryTeam(tempTeam)
     
     // Push TeamListTableVC
     let teamListVC = TeamListTableVC(team: team)

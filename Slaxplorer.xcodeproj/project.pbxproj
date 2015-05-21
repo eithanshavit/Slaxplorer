@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		273EE01406A5D31F7C537106 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9811E4580FBBD2B65DC7CE6 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5E7CA43E3014639A8B58A955 /* Pods_SlaxplorerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD66067396FE6C10EC77D85B /* Pods_SlaxplorerTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D008A0781B0D4DAD00D11D57 /* TeamListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D008A0761B0D4DAD00D11D57 /* TeamListTableViewCell.swift */; };
+		D008A07D1B0D4E2600D11D57 /* TeamListDetailedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D008A07B1B0D4E2600D11D57 /* TeamListDetailedTableViewCell.xib */; };
+		D008A0811B0D4E4300D11D57 /* TeamListConciseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D008A07F1B0D4E4300D11D57 /* TeamListConciseTableViewCell.xib */; };
+		D008A0851B0D4E5C00D11D57 /* TeamListEmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D008A0831B0D4E5C00D11D57 /* TeamListEmptyTableViewCell.xib */; };
+		D008A0871B0D586E00D11D57 /* CoreDataDebugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D008A0861B0D586E00D11D57 /* CoreDataDebugger.swift */; };
+		D008A0891B0D5E8A00D11D57 /* FetchControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D008A0881B0D5E8A00D11D57 /* FetchControllerDelegate.swift */; };
 		D0561D7F1B0BE6260026EEA0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0561D7E1B0BE6260026EEA0 /* Images.xcassets */; };
 		D0561D821B0BE6260026EEA0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0561D801B0BE6260026EEA0 /* LaunchScreen.xib */; };
 		D0561D8E1B0BE6260026EEA0 /* SlaxplorerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0561D8D1B0BE6260026EEA0 /* SlaxplorerTests.swift */; };
@@ -45,6 +51,12 @@
 		5CD193AE0A4813EE66487070 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		AD66067396FE6C10EC77D85B /* Pods_SlaxplorerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SlaxplorerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9811E4580FBBD2B65DC7CE6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D008A0761B0D4DAD00D11D57 /* TeamListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamListTableViewCell.swift; path = Views/TeamListTableViewCell.swift; sourceTree = "<group>"; };
+		D008A07B1B0D4E2600D11D57 /* TeamListDetailedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TeamListDetailedTableViewCell.xib; path = Views/TeamListDetailedTableViewCell.xib; sourceTree = "<group>"; };
+		D008A07F1B0D4E4300D11D57 /* TeamListConciseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TeamListConciseTableViewCell.xib; path = Views/TeamListConciseTableViewCell.xib; sourceTree = "<group>"; };
+		D008A0831B0D4E5C00D11D57 /* TeamListEmptyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamListEmptyTableViewCell.xib; sourceTree = "<group>"; };
+		D008A0861B0D586E00D11D57 /* CoreDataDebugger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataDebugger.swift; path = Objects/CoreDataDebugger.swift; sourceTree = "<group>"; };
+		D008A0881B0D5E8A00D11D57 /* FetchControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FetchControllerDelegate.swift; path = Objects/FetchControllerDelegate.swift; sourceTree = "<group>"; };
 		D0561D6F1B0BE6250026EEA0 /* Slaxplorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Slaxplorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0561D731B0BE6250026EEA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0561D7E1B0BE6260026EEA0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -182,6 +194,10 @@
 			isa = PBXGroup;
 			children = (
 				D0561D801B0BE6260026EEA0 /* LaunchScreen.xib */,
+				D008A0761B0D4DAD00D11D57 /* TeamListTableViewCell.swift */,
+				D008A07B1B0D4E2600D11D57 /* TeamListDetailedTableViewCell.xib */,
+				D008A07F1B0D4E4300D11D57 /* TeamListConciseTableViewCell.xib */,
+				D008A0831B0D4E5C00D11D57 /* TeamListEmptyTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -218,6 +234,8 @@
 				D0F390961B0C23FA00EB0DD6 /* TeamManager.swift */,
 				D0F390A01B0C5EBC00EB0DD6 /* CloudManager.swift */,
 				D0F390A21B0D287B00EB0DD6 /* Secrets.swift */,
+				D008A0861B0D586E00D11D57 /* CoreDataDebugger.swift */,
+				D008A0881B0D5E8A00D11D57 /* FetchControllerDelegate.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -320,6 +338,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0F390A71B0D432C00EB0DD6 /* TeamListTableVC.xib in Resources */,
+				D008A07D1B0D4E2600D11D57 /* TeamListDetailedTableViewCell.xib in Resources */,
+				D008A0811B0D4E4300D11D57 /* TeamListConciseTableViewCell.xib in Resources */,
+				D008A0851B0D4E5C00D11D57 /* TeamListEmptyTableViewCell.xib in Resources */,
 				D0F3909F1B0C40FA00EB0DD6 /* LoginVC.xib in Resources */,
 				D0561D821B0BE6260026EEA0 /* LaunchScreen.xib in Resources */,
 				D0561D7F1B0BE6260026EEA0 /* Images.xcassets in Resources */,
@@ -437,10 +458,13 @@
 				D0F390881B0C0CA300EB0DD6 /* Team.m in Sources */,
 				D0F3908D1B0C0CAF00EB0DD6 /* _Member.m in Sources */,
 				D0F390A11B0C5EBC00EB0DD6 /* CloudManager.swift in Sources */,
+				D008A0781B0D4DAD00D11D57 /* TeamListTableViewCell.swift in Sources */,
 				D0F390A61B0D432C00EB0DD6 /* TeamListTableVC.swift in Sources */,
 				D0F390931B0C0E8900EB0DD6 /* DataStack.swift in Sources */,
 				D0F390791B0BF57000EB0DD6 /* AppDelegate.swift in Sources */,
 				D0F390971B0C23FA00EB0DD6 /* TeamManager.swift in Sources */,
+				D008A0891B0D5E8A00D11D57 /* FetchControllerDelegate.swift in Sources */,
+				D008A0871B0D586E00D11D57 /* CoreDataDebugger.swift in Sources */,
 				D0F3907E1B0BF69300EB0DD6 /* MainNavigationVC.swift in Sources */,
 				D0F390811B0BF6A800EB0DD6 /* Slaxplorer.xcdatamodeld in Sources */,
 				D0F390871B0C0CA300EB0DD6 /* Member.m in Sources */,

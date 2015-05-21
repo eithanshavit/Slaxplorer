@@ -4,6 +4,7 @@
 
 // Core Data
 #import "Team.h"
+#import "Member.h"
 
 // Frameworks
 #import <FastImageCache/FICImageCache.h>

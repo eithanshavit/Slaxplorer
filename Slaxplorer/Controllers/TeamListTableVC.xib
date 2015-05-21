@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TeamListTableVC" customModule="Slaxplorer" customModuleProvider="target">
+            <connections>
+                <outlet property="tableView" destination="1yU-IY-8bz" id="EnZ-hd-hIg"/>
+                <outlet property="teamNameLabel" destination="j5r-2c-pH7" id="SeC-PA-TzM"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="YCU-Wp-fQj"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yB3-PB-NX6" userLabel="headerContainer">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5r-2c-pH7" userLabel="teamNameLabel">
+                            <rect key="frame" x="126" y="52" width="124" height="28"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                            <color key="textColor" red="0.38823529411764707" green="0.38823529411764707" blue="0.38823529411764707" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your team" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcs-h0-634" userLabel="teamTitleLabel">
+                            <rect key="frame" x="145" y="27" width="86" height="23"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                            <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="j5r-2c-pH7" firstAttribute="top" secondItem="qcs-h0-634" secondAttribute="bottom" constant="2" id="8Sy-8B-tDs"/>
+                        <constraint firstAttribute="bottom" secondItem="j5r-2c-pH7" secondAttribute="bottom" constant="9" id="AB9-KO-3L2"/>
+                        <constraint firstAttribute="centerX" secondItem="qcs-h0-634" secondAttribute="centerX" id="GKF-m6-B8z"/>
+                        <constraint firstAttribute="centerX" secondItem="j5r-2c-pH7" secondAttribute="centerX" id="RZa-y6-hx4"/>
+                        <constraint firstAttribute="height" constant="89" id="eqx-On-Fa2"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTg-ad-xXS" userLabel="logoutButton">
+                    <rect key="frame" x="0.0" y="607" width="375" height="60"/>
+                    <color key="backgroundColor" red="1" green="0.56078431370000004" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="cZd-cy-Rf4"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="29"/>
+                    <state key="normal" title="log out">
+                        <color key="titleColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="logoutButtonTap:" destination="-1" eventType="touchUpInside" id="eR5-cd-IZJ"/>
+                    </connections>
+                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="1yU-IY-8bz" userLabel="tableView">
+                    <rect key="frame" x="0.0" y="89" width="375" height="518"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="1yU-IY-8bz" firstAttribute="top" secondItem="yB3-PB-NX6" secondAttribute="bottom" id="0Nb-Vl-kih"/>
+                <constraint firstItem="nTg-ad-xXS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="12h-qi-Cmc"/>
+                <constraint firstItem="yB3-PB-NX6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="De1-fG-n4N"/>
+                <constraint firstItem="1yU-IY-8bz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="FVJ-XP-sIW"/>
+                <constraint firstAttribute="trailing" secondItem="nTg-ad-xXS" secondAttribute="trailing" id="OwT-EW-SP2"/>
+                <constraint firstItem="nTg-ad-xXS" firstAttribute="top" secondItem="1yU-IY-8bz" secondAttribute="bottom" id="U4E-nY-PAK"/>
+                <constraint firstAttribute="trailing" secondItem="1yU-IY-8bz" secondAttribute="trailing" id="dO4-gW-hAL"/>
+                <constraint firstItem="yB3-PB-NX6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="kw6-x1-EgS"/>
+                <constraint firstAttribute="bottom" secondItem="nTg-ad-xXS" secondAttribute="bottom" id="oiM-5z-Wfj"/>
+                <constraint firstAttribute="trailing" secondItem="yB3-PB-NX6" secondAttribute="trailing" id="rzQ-Ty-Ral"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+        </view>
+    </objects>
+</document>

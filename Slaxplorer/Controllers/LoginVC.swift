@@ -118,11 +118,13 @@ public class LoginVC: UIViewController {
     }
   }
   
+  // MARK: - Team
+  
   // Handle response from team info request
   private func handleTeamResponse(team: Team?, teamDataStatus: TeamDataStatus, connectionStatus: CloudManagerConnectionStatus) {
     switch (connectionStatus, teamDataStatus) {
     case (.OK, .OK):
-      break
+      loginTeam(team!)
     case (.OK, .AccountInactive):
       showError("The team you're interested in was deleted")
     case (.OK, .Unknown), (.UnknownFailure, _):
@@ -138,6 +140,15 @@ public class LoginVC: UIViewController {
     default:
       assertionFailure("Invalid code path")
     }
+  }
+  
+  private func loginTeam(team: Team) {
+    TeamManager.logInTeam(team, dataStack: dataStack)
+    dataStack.saveMainContext()
+    
+    // Push TeamListTableVC
+    let teamListVC = TeamListTableVC(team: team)
+    navigationController?.pushViewController(teamListVC, animated: true)
   }
   
   // MARK: - Clipboard

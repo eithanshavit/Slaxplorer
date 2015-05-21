@@ -39,7 +39,7 @@ class DataStack: NSObject {
   }
   
   // When background MOC is saved, merge to main MOC
-  private func contextDidSavePrivateQueueContext(notification: NSNotification) {
+  func contextDidSavePrivateQueueContext(notification: NSNotification) {
     dispatch_sync(lockQueue) {
       self.managedObjectContext?.performBlock {
         self.managedObjectContext?.mergeChangesFromContextDidSaveNotification(notification)
@@ -48,7 +48,7 @@ class DataStack: NSObject {
   }
   
   // When main MOC is saved, merge to background MOC
-  private func contextDidSaveMainQueueContext(notification: NSNotification) {
+  func contextDidSaveMainQueueContext(notification: NSNotification) {
     dispatch_sync(lockQueue) {
       self.backgroundManagedObjectContext?.performBlock {
         self.backgroundManagedObjectContext?.mergeChangesFromContextDidSaveNotification(notification)

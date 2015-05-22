@@ -31,16 +31,14 @@ public class CloudManager: NSObject {
   // MARK: - State
   
   var alamofireManager: Alamofire.Manager!
-  var dataStack: DataStack!
   
   // MARK: - Main Instance
   
-  // The main CloudManager uses the Alamofire shared manager, and the shared DataStack.
+  // The main CloudManager uses the Alamofire shared manager.
   // If needed, create different CloudManagers with different configs
   class var mainManager: CloudManager {
     var cm = CloudManager()
     cm.alamofireManager = Alamofire.Manager.sharedInstance
-    cm.dataStack = DataStack.sharedInstance
     return cm
   }
   

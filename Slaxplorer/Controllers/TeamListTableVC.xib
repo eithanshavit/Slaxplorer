@@ -9,6 +9,8 @@
                 <outlet property="loaderContainer" destination="gkk-xl-hMB" id="b35-0Y-3dB"/>
                 <outlet property="tableView" destination="1yU-IY-8bz" id="EnZ-hd-hIg"/>
                 <outlet property="teamNameLabel" destination="j5r-2c-pH7" id="SeC-PA-TzM"/>
+                <outlet property="toastLabel" destination="yJt-ad-NT6" id="KoR-42-dOb"/>
+                <outlet property="toastView" destination="JXC-Mz-vWc" id="v4m-WT-bPZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="YCU-Wp-fQj"/>
             </connections>
         </placeholder>
@@ -32,13 +34,35 @@
                             <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JXC-Mz-vWc" userLabel="toastView">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="we're having problems connecting to the internet..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJt-ad-NT6" userLabel="toastLabel">
+                                    <rect key="frame" x="20" y="20" width="335" height="49"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="1" green="0.96470588235294119" blue="0.066666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="yJt-ad-NT6" secondAttribute="trailing" constant="20" id="R0g-wB-yqL"/>
+                                <constraint firstItem="yJt-ad-NT6" firstAttribute="leading" secondItem="JXC-Mz-vWc" secondAttribute="leading" constant="20" id="YX8-fc-xAg"/>
+                                <constraint firstAttribute="bottom" secondItem="yJt-ad-NT6" secondAttribute="bottom" constant="20" id="mZY-cJ-Dbr"/>
+                                <constraint firstItem="yJt-ad-NT6" firstAttribute="top" secondItem="JXC-Mz-vWc" secondAttribute="top" constant="20" id="rte-6m-n4K"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="JXC-Mz-vWc" secondAttribute="bottom" id="3KC-82-Z5I"/>
+                        <constraint firstAttribute="trailing" secondItem="JXC-Mz-vWc" secondAttribute="trailing" id="6Rs-fV-GDl"/>
                         <constraint firstItem="j5r-2c-pH7" firstAttribute="top" secondItem="qcs-h0-634" secondAttribute="bottom" constant="2" id="8Sy-8B-tDs"/>
                         <constraint firstAttribute="bottom" secondItem="j5r-2c-pH7" secondAttribute="bottom" constant="9" id="AB9-KO-3L2"/>
                         <constraint firstAttribute="centerX" secondItem="qcs-h0-634" secondAttribute="centerX" id="GKF-m6-B8z"/>
+                        <constraint firstItem="JXC-Mz-vWc" firstAttribute="top" secondItem="yB3-PB-NX6" secondAttribute="top" id="HzE-xn-GvW"/>
                         <constraint firstAttribute="centerX" secondItem="j5r-2c-pH7" secondAttribute="centerX" id="RZa-y6-hx4"/>
+                        <constraint firstItem="JXC-Mz-vWc" firstAttribute="leading" secondItem="yB3-PB-NX6" secondAttribute="leading" id="S6C-lu-Z2o"/>
                         <constraint firstAttribute="height" constant="89" id="eqx-On-Fa2"/>
                     </constraints>
                 </view>
@@ -74,7 +98,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no data yet... but we're working on it!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0s-hm-fuC" userLabel="loaderTitle">
                             <rect key="frame" x="50" y="312" width="275" height="52"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="22"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>

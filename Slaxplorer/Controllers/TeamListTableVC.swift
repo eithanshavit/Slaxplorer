@@ -13,6 +13,8 @@ class TeamListTableVC: UIViewController {
   // MARK: - State
   
   // MARK: Outlets
+  @IBOutlet weak var toastView: UIView!
+  @IBOutlet weak var toastLabel: UILabel!
   @IBOutlet weak var loaderContainer: UIView!
   @IBOutlet weak var teamNameLabel: UILabel!
   @IBOutlet weak var tableView: UITableView!
@@ -64,12 +66,29 @@ class TeamListTableVC: UIViewController {
   // MARK: - Data
   
   func updateData() {
-    cloudManager.requestTeamMemberList(team, completion: handleMembersResponse)
+    cloudManager.requestTeamMemberList(team.token, completion: handleMembersResponse)
   }
   
   // Handle response from team member list request
   private func handleMembersResponse(members: [TempMember]?, memberListDataStatus: MemberListDataStatus, connectionStatus: CloudManagerConnectionStatus) {
-    DataManager.mainManager.syncTeamWithTempMembers(team, members: members!)
+    switch (connectionStatus, memberListDataStatus) {
+    case (.OK, .OK):
+      DataManager.mainManager.syncTeamWithTempMembers(team, members: members!)
+    case (.OK, .AccountInactive):
+      showToast("The team you're interested in was deleted")
+    case (.OK, .Unknown), (.UnknownFailure, _):
+      showToast("Hmmm, something happened, but I'm not sure what")
+    case (.NotAuth, _):
+      showToast("Apologies, no access token was provided")
+    case (.InvalidAuth, _):
+      showToast("Apologies, invalid access token was provided")
+    case (.ConnectionFailure, _):
+      showToast("Apologies, unable to connect at the moment")
+    case (.ParseFailure, _):
+      showToast("Apologies, unable to get data from web")
+    default:
+      assertionFailure("Invalid code path")
+    }
   }
   
   // MARK: - Actions
@@ -82,6 +101,7 @@ class TeamListTableVC: UIViewController {
   }
   
   // MARK: - Loader
+  
   func showLoader(show: Bool, animated: Bool) {
     if animated {
       UIView.animateWithDuration(
@@ -108,19 +128,62 @@ class TeamListTableVC: UIViewController {
     fetchRequest.predicate = NSPredicate(format: "team == %@", self.team)
     fetchRequest.sortDescriptors = [NSSortDescriptor(key: "username", ascending: true)]
     let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
+    controller.delegate = self.fetchControllerDelegate
     var error: NSError?
     if !controller.performFetch(&error) {
       println("Unable to fetch from fetchedResultsController \(error)")
       assertionFailure("Unable to fetch from fetchedResultsController")
     }
-    controller.delegate = self.fetchControllerDelegate
     return controller
     }()
   
   private lazy var fetchControllerDelegate: FetchControllerDelegate = {
     let controller = FetchControllerDelegate(tableView: self.tableView)
+    controller.onUpdateDone = self.fetchResultsControllerDidChangeContent
     return controller
     }()
+  
+  func fetchResultsControllerDidChangeContent() {
+    let doesHaveObjects = self.fetchedResultsController.fetchedObjects!.count == 0
+    self.showLoader(doesHaveObjects, animated: true)
+  }
+  
+  // MARK: - Toast!
+  
+  private func showToast(text: String) {
+    toastLabel.text = text
+    toastView.alpha = 0
+    toastView.hidden = false
+    UIView.animateWithDuration(
+      0.3,
+      delay: 0,
+      options: UIViewAnimationOptions.CurveEaseIn,
+      animations: {
+        () -> Void in
+        self.toastView.alpha = 1
+      },
+      completion: {
+        (Bool) -> Void in
+        delayExec(3) {
+          self.hideToast()
+        }
+      })
+  }
+  
+  private func hideToast() {
+    UIView.animateWithDuration(
+      0.3,
+      delay: 0,
+      options: UIViewAnimationOptions.CurveEaseIn,
+      animations: {
+        () -> Void in
+        self.toastView.alpha = 0
+      },
+      completion: {
+        (Bool) -> Void in
+        self.toastView.hidden = true
+      })
+  }
   
 }
 

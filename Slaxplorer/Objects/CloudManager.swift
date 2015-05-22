@@ -80,7 +80,6 @@ public class CloudManager: NSObject {
         // Handle error
         if error != nil {
           // Error occurred
-          println(error)
           completion(nil, .Unknown, .ConnectionFailure)
           return
         }
@@ -131,11 +130,19 @@ public class CloudManager: NSObject {
   // MARK: - Member resources
   
   // Requests user list of <team> and calls <completion> upon completion
-  public func requestTeamMemberList(team: Team, completion: ([TempMember]?, MemberListDataStatus, CloudManagerConnectionStatus) -> Void) {
+  public func requestTeamMemberList(token: String, completion: ([TempMember]?, MemberListDataStatus, CloudManagerConnectionStatus) -> Void) {
+    // Escape given token
+    let safeToken = token.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)
+    
+    if safeToken == nil {
+      // Report error with escaping token
+      completion(nil, .Unknown, .InvalidAuth)
+      return
+    }
     
     // Request from web
     let params = [
-      "token": team.token
+      "token": safeToken!
     ]
     alamofireManager!
       .request(.GET, URLUsersList, parameters: params)
@@ -145,7 +152,6 @@ public class CloudManager: NSObject {
         // Handle error
         if error != nil {
           // Error occurred
-          println(error)
           completion(nil, .Unknown, .ConnectionFailure)
           return
         }

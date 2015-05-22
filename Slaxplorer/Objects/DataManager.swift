@@ -155,12 +155,12 @@ public class DataManager: NSObject {
     let idsToAdd = tempIDSet.subtract(idSet)
     
     // Update existing members
-    println("-START UPDATE-")
+    //println("-START UPDATE-")
     for id in idsToUpdate {
       let member = idToMemberMap[id]!
       let tempMember = idToTempMemberMap[id]!
       updateMemberWithTempMember(member, tempMember: tempMember)
-      println("UPDATING \(member.username)")
+      //println("UPDATING \(member.username)")
     }
     // Add new members
     for id in idsToAdd {
@@ -169,15 +169,15 @@ public class DataManager: NSObject {
       let tempMember = idToTempMemberMap[id]!
       updateMemberWithTempMember(member, tempMember: tempMember)
       localTeam!.addMembersObject(member)
-      println("ADDING \(tempMember.username)")
+      //println("ADDING \(tempMember.username)")
     }
     // Delete unnecessary members
     for id in idsToDelete {
       let member = idToMemberMap[id]!
       localTeam.removeMembersObject(member)
-      println("DELETING \(member.username)")
+      //println("DELETING \(member.username)")
     }
-    println("-END UPDATE-")
+    //println("-END UPDATE-")
     
     // Phew... Now save the background context
     dataStack.saveBackgroundContext()

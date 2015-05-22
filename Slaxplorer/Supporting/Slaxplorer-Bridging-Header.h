@@ -7,4 +7,4 @@
 #import "Member.h"
 
 // Frameworks
-#import <FastImageCache/FICImageCache.h>
+@import FastImageCache;

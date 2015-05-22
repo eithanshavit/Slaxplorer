@@ -17,14 +17,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     
+    // Run some startup debug code
+    CoreDataDebugger.sharedInstace.debugStartupHook()
+    
+    // Setup FastImageCache
+    FastImageCacheManager.sharedInstance.setup()
+    
+    // Setup window
     window = UIWindow(frame: UIScreen.mainScreen().bounds)
     if let window = window {
       window.backgroundColor = UIColor.whiteColor()
       window.rootViewController = MainNavigationVC()
       window.makeKeyAndVisible()
     }
-    return true
     
+    return true
   }
 
   func applicationWillResignActive(application: UIApplication) {

@@ -221,5 +221,26 @@ public class CloudManager: NSObject {
     return ret
   }
   
+  // MARK: - Images
+  
+  func downloadImageWithURL(url: NSURL, completion: (UIImage?) -> ()) {
+    alamofireManager!
+    .request(.GET, url)
+    .validate(contentType: ["image/*"])
+    .response {
+      (_: NSURLRequest, _: NSHTTPURLResponse?, imageData: AnyObject?, error: NSError?) -> Void in
+      if error != nil {
+        // If we failed fetching the photo there's not much we can do for the user. Just return nil and the placeholder photo will stay
+        completion(nil)
+        return
+      }
+      if let uiImage = UIImage(data: (imageData as! NSData)) {
+        completion(uiImage)
+      } else {
+        // If we failed fetching the photo there's not much we can do for the user. Just return nil and the placeholder photo will stay
+        completion(nil)
+      }
+    }
+  }
   
 }

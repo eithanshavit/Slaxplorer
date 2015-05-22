@@ -20,6 +20,9 @@ class TeamListTableViewCell: UITableViewCell {
   }
   
   static let reuseIdentifier = "TeamListTableViewCell"
+  
+  let imageCache = FICImageCache.sharedImageCache()
+  
   var originalUsernameLabelOffset: CGFloat = 0
   
   override func awakeFromNib() {
@@ -48,8 +51,14 @@ class TeamListTableViewCell: UITableViewCell {
     usernameLabel.text = "@" + member.username
     
     // Set image
-    profileImageView.image = MemberProfilePhoto.thumbPhotoForID(member.id)
-    
+    // Get photo from cache
+    let imageExists = imageCache.retrieveImageForEntity(member, withFormatName: FastImageCacheManager.FICFormatNameProfilePhotoThumb) {
+      (photoMessage, formatName, image) -> Void in
+      self.profileImageView.image = image
+    }
+    if !imageExists {
+      self.profileImageView.image = MemberProfilePhoto.thumbPhotoForID(member.id)
+    }
     setNeedsDisplay()
   }
 }

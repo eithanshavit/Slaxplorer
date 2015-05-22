@@ -16,6 +16,10 @@ class CoreDataDebugger: NSObject {
   let dataStack = DataStack.sharedInstance
   let moc = DataStack.sharedInstance.managedObjectContext
   
+  func debugStartupHook() {
+    //clearAllData()
+  }
+  
   func clearAllData() {
     clearObjectsWithEntityName("Team")
     clearObjectsWithEntityName("Member")

@@ -5,8 +5,8 @@
 //  Created by  Eithan Shavit on 5/20/15.
 //  Copyright (c) 2015 Eithan Shavit. All rights reserved.
 //
-
-//  Helper class to forward NSFetchedResultsControllerDelegate to a tableView
+//  Description:
+//  NSFetchedResultsControllerDelegate implementaion to be used by FRCs
 
 import CoreData
 import UIKit

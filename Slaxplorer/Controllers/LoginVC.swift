@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Eithan Shavit. All rights reserved.
 //
 
-// LogicVC controls the log-in process using an API access token
-// Note: It's defined as a public class for testing purposes
+//  Description:
+//  LogicVC controls the log-in process using an API access token.
 
 import UIKit
 

@@ -5,6 +5,9 @@
 //  Created by  Eithan Shavit on 5/20/15.
 //  Copyright (c) 2015 Eithan Shavit. All rights reserved.
 //
+//  Description:
+//  TeamListTableVC controls the presentation of a list of member for a given team. 
+//  It also triggers fetches from CloudManager for updated data.
 
 import UIKit
 

@@ -5,14 +5,8 @@
 //  Created by  Eithan Shavit on 5/22/15.
 //  Copyright (c) 2015 Eithan Shavit. All rights reserved.
 //
-
-//
-//  FastImageCacheManager.swift
-//  selek
-//
-//  Created by  Eithan Shavit on 4/10/15.
-//  Copyright (c) 2015 Eithan Shavit. All rights reserved.
-//
+//  Description:
+//  FastImageCacheManager class encapsulates FastImageCache functionality and initialization.
 
 import UIKit
 

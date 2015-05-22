@@ -5,9 +5,9 @@
 //  Created by  Eithan Shavit on 5/20/15.
 //  Copyright (c) 2015 Eithan Shavit. All rights reserved.
 //
-
-// A class to hold secrets!!
-// Usually this would not be committed, but for exerecise purposes I guess this is ok.
+//  Description:
+//  A class to hold secrets!!
+//  Usually this would not be committed, but for exerecise purposes I guess this is ok.
 
 public class Secrets {
   

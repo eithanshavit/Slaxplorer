@@ -5,6 +5,8 @@
 //  Created by  Eithan Shavit on 5/20/15.
 //  Copyright (c) 2015 Eithan Shavit. All rights reserved.
 //
+//  Description:
+//  A UITableViewCell for the TeamListTableVC table view.
 
 import UIKit
 
@@ -30,12 +32,6 @@ class TeamListTableViewCell: UITableViewCell {
     // Initialization code
   }
   
-  override func setSelected(selected: Bool, animated: Bool) {
-    super.setSelected(selected, animated: animated)
-    
-    // Configure the view for the selected state
-  }
-  
   func configureWithMember(member: Member) {
     // Configure labels
     fullNameLabel.hidden = false
@@ -50,8 +46,7 @@ class TeamListTableViewCell: UITableViewCell {
     }
     usernameLabel.text = "@" + member.username
     
-    // Set image
-    // Get photo from cache
+    // Get photo from cache and set it if cell is still visible
     let imageExists = imageCache.retrieveImageForEntity(member, withFormatName: FastImageCacheManager.FICFormatNameProfilePhotoThumb) {
       (photoMessage, formatName, image) -> Void in
       self.profileImageView.image = image

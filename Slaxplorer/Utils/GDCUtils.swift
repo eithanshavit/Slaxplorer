@@ -5,8 +5,8 @@
 //  Created by  Eithan Shavit on 5/21/15.
 //  Copyright (c) 2015 Eithan Shavit. All rights reserved.
 //
-
-// Utilites for nice GCD in swift
+//  Description:
+//  Some nice utilites for GCD in swift
 
 import Foundation
 

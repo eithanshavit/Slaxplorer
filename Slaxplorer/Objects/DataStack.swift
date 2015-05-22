@@ -5,6 +5,8 @@
 //  Created by  Eithan Shavit on 5/19/15.
 //  Copyright (c) 2015 Eithan Shavit. All rights reserved.
 //
+//  Description:
+//  DataStack class encapsulates CoreData functionality and initialization.
 
 import UIKit
 import CoreData

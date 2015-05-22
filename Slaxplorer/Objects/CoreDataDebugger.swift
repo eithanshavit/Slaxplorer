@@ -5,6 +5,8 @@
 //  Created by  Eithan Shavit on 5/20/15.
 //  Copyright (c) 2015 Eithan Shavit. All rights reserved.
 //
+//  Description:
+//  Utility class for debuggin Core Data
 
 import UIKit
 import CoreData

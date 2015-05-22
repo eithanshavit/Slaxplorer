@@ -10,6 +10,104 @@ import UIKit
 import Slaxplorer
 import Quick
 import Nimble
+import OHHTTPStubs
+
+class TeamListTableVC: QuickSpec {
+  
+  override func spec() {
+    
+    describe("TeamListTableVC") {
+      
+      var teamListTableVC: Slaxplorer.TeamListTableVC!
+      
+      beforeEach {
+        teamListTableVC = Slaxplorer.TeamListTableVC()
+        teamListTableVC.cloudManager = Slaxplorer.CloudManager.mainManager
+      }
+      
+      context("handles bad responses from cloud") {
+      
+        it("should handle account inactive") {
+          OHHTTPStubs.stubRequestsPassingTest({
+            (request: NSURLRequest) -> Bool in
+              return request.URL!.host == Slaxplorer.CloudManager.URLHost
+            }, withStubResponse: {
+              (request: NSURLRequest) -> OHHTTPStubsResponse in
+              let obj = ["ok": false, "error": "account_inactive"]
+              return OHHTTPStubsResponse(JSONObject: obj, statusCode:200, headers:nil)
+          })
+          teamListTableVC.updateData("someToken")
+          expect(teamListTableVC.toastText).toEventually(equal("The team you're interested in was deleted"), timeout: 3)
+        }
+        
+        it("should handle unknown failure ") {
+          OHHTTPStubs.stubRequestsPassingTest({
+            (request: NSURLRequest) -> Bool in
+              return request.URL!.host == Slaxplorer.CloudManager.URLHost
+            }, withStubResponse: {
+              (request: NSURLRequest) -> OHHTTPStubsResponse in
+              let obj = ["ok": false, "error": "bad key"]
+              return OHHTTPStubsResponse(JSONObject: obj, statusCode:200, headers:nil)
+          })
+          teamListTableVC.updateData("someToken")
+          expect(teamListTableVC.toastText).toEventually(equal("Hmmm, something's wrong, but I'm not sure what"), timeout: 3)
+        }
+        
+        it("should handle post connection failure 1") {
+          OHHTTPStubs.stubRequestsPassingTest({
+            (request: NSURLRequest) -> Bool in
+              return request.URL!.host == Slaxplorer.CloudManager.URLHost
+            }, withStubResponse: {
+              (request: NSURLRequest) -> OHHTTPStubsResponse in
+              let obj = ["ok": false, "error": "not_authed"]
+              return OHHTTPStubsResponse(JSONObject: obj, statusCode:200, headers:nil)
+          })
+          teamListTableVC.updateData("someToken")
+          expect(teamListTableVC.toastText).toEventually(equal("Apologies, unable to connect"), timeout: 3)
+        }
+        
+        it("should handle post connection failure 2") {
+          OHHTTPStubs.stubRequestsPassingTest({
+            (request: NSURLRequest) -> Bool in
+              return request.URL!.host == Slaxplorer.CloudManager.URLHost
+            }, withStubResponse: {
+              (request: NSURLRequest) -> OHHTTPStubsResponse in
+              let obj = ["ok": false, "error": "invalid_auth"]
+              return OHHTTPStubsResponse(JSONObject: obj, statusCode:200, headers:nil)
+          })
+          teamListTableVC.updateData("someToken")
+          expect(teamListTableVC.toastText).toEventually(equal("Apologies, unable to connect"), timeout: 3)
+        }
+        
+        it("should handle post connection parse failure") {
+          OHHTTPStubs.stubRequestsPassingTest({
+            (request: NSURLRequest) -> Bool in
+              return request.URL!.host == Slaxplorer.CloudManager.URLHost
+            }, withStubResponse: {
+              (request: NSURLRequest) -> OHHTTPStubsResponse in
+              let obj = ["ok": true, "badkey": "badvalue"]
+              return OHHTTPStubsResponse(JSONObject: obj, statusCode:200, headers:nil)
+          })
+          teamListTableVC.updateData("someToken")
+          expect(teamListTableVC.toastText).toEventually(equal("Apologies, unable to connect"), timeout: 3)
+        }
+        
+        it("should handle connection failure") {
+          OHHTTPStubs.stubRequestsPassingTest({
+            (request: NSURLRequest) -> Bool in
+              return request.URL!.host == Slaxplorer.CloudManager.URLHost
+            }, withStubResponse: {
+              (request: NSURLRequest) -> OHHTTPStubsResponse in
+              let obj = ["ok": true, "badkey": "badvalue"]
+              return OHHTTPStubsResponse(JSONObject: obj, statusCode:999, headers:nil)
+          })
+          teamListTableVC.updateData("someToken")
+          expect(teamListTableVC.toastText).toEventually(equal("Apologies, unable to connect at the moment"), timeout: 3)
+        }
+      }
+    }
+  }
+}
 
 class LoginVCSpec: QuickSpec {
   
@@ -29,66 +127,99 @@ class LoginVCSpec: QuickSpec {
         expect(loginVC.tokenTextView.text).to(equal(Slaxplorer.Secrets.defaultAPIToken))
       }
         
-      context("handles responses from cloud") {
-        
-        var mockCM: MockCloudManager!
-        
-        class MockCloudManager: Slaxplorer.CloudManager {
-          var mocks: (team: TempTeam?, dataStatus: TeamDataStatus, connectionStatus: CloudManagerConnectionStatus)!
-          private override func requestTeamInfoWithToken(token: String, completion: (TempTeam?, TeamDataStatus, CloudManagerConnectionStatus) -> Void) {
-            completion(mocks.team, mocks.dataStatus, mocks.connectionStatus)
-          }
-        }
-        
-        beforeEach {
-          mockCM = MockCloudManager()
-          loginVC.cloudManager = mockCM
-        }
+      context("handles bad responses from cloud") {
         
         it("should handle account inactive") {
-          mockCM.mocks = (nil, .AccountInactive, .OK)
+          OHHTTPStubs.stubRequestsPassingTest({
+            (request: NSURLRequest) -> Bool in
+              return request.URL!.host == Slaxplorer.CloudManager.URLHost
+            }, withStubResponse: {
+              (request: NSURLRequest) -> OHHTTPStubsResponse in
+              let obj = ["ok": false, "error": "account_inactive"]
+              return OHHTTPStubsResponse(JSONObject: obj, statusCode:200, headers:nil)
+          })
           loginVC.nextButtonTap(NSObject())
-          expect(loginVC.promptLabel.text).to(equal("The team you're interested in was deleted"))
+          expect(loginVC.promptLabel.text).toEventually(equal("The team you're interested in was deleted"), timeout: 3)
         }
         
         it("should handle not authed") {
-          mockCM.mocks = (nil, .Unknown, .NotAuth)
+          OHHTTPStubs.stubRequestsPassingTest({
+            (request: NSURLRequest) -> Bool in
+              return request.URL!.host == Slaxplorer.CloudManager.URLHost
+            }, withStubResponse: {
+              (request: NSURLRequest) -> OHHTTPStubsResponse in
+              let obj = ["ok": false, "error": "not_authed"]
+              return OHHTTPStubsResponse(JSONObject: obj, statusCode:200, headers:nil)
+          })
           loginVC.nextButtonTap(NSObject())
-          expect(loginVC.promptLabel.text).to(equal("Apologies, no access token was provided"))
+          expect(loginVC.promptLabel.text).toEventually(equal("Apologies, no access token was provided"), timeout: 3)
         }
         
         it("should handle invalid auth") {
-          mockCM.mocks = (nil, .Unknown, .InvalidAuth)
+          OHHTTPStubs.stubRequestsPassingTest({
+            (request: NSURLRequest) -> Bool in
+              return request.URL!.host == Slaxplorer.CloudManager.URLHost
+            }, withStubResponse: {
+              (request: NSURLRequest) -> OHHTTPStubsResponse in
+              let obj = ["ok": false, "error": "invalid_auth"]
+              return OHHTTPStubsResponse(JSONObject: obj, statusCode:200, headers:nil)
+          })
           loginVC.nextButtonTap(NSObject())
-          expect(loginVC.promptLabel.text).to(equal("Apologies, invalid access token was provided"))
+          expect(loginVC.promptLabel.text).toEventually(equal("Apologies, invalid access token was provided"), timeout: 3)
         }
         
         it("should handle connection failure") {
-          mockCM.mocks = (nil, .Unknown, .ConnectionFailure)
+          OHHTTPStubs.stubRequestsPassingTest({
+            (request: NSURLRequest) -> Bool in
+              return request.URL!.host == Slaxplorer.CloudManager.URLHost
+            }, withStubResponse: {
+              (request: NSURLRequest) -> OHHTTPStubsResponse in
+              let obj = ["ok": false, "error": "invalid_auth"]
+              return OHHTTPStubsResponse(JSONObject: obj, statusCode:999, headers:nil)
+          })
           loginVC.nextButtonTap(NSObject())
-          expect(loginVC.promptLabel.text).to(equal("Apologies, unable to connect at the moment"))
+          expect(loginVC.promptLabel.text).toEventually(equal("Apologies, unable to connect at the moment"), timeout: 3)
         }
         
         it("should handle parse failure") {
-          mockCM.mocks = (nil, .Unknown, .ParseFailure)
+          OHHTTPStubs.stubRequestsPassingTest({
+            (request: NSURLRequest) -> Bool in
+              return request.URL!.host == Slaxplorer.CloudManager.URLHost
+            }, withStubResponse: {
+              (request: NSURLRequest) -> OHHTTPStubsResponse in
+              let obj = ["wrongkey": false, "wrongkey2": "invalid_auth"]
+              return OHHTTPStubsResponse(JSONObject: obj, statusCode:200, headers:nil)
+          })
           loginVC.nextButtonTap(NSObject())
-          expect(loginVC.promptLabel.text).to(equal("Apologies, unable to get data from web"))
+          expect(loginVC.promptLabel.text).toEventually(equal("Apologies, unable to get data from web"), timeout: 3)
         }
         
         it("should handle unknown failure") {
-          mockCM.mocks = (nil, .Unknown, .UnknownFailure)
+          OHHTTPStubs.stubRequestsPassingTest({
+            (request: NSURLRequest) -> Bool in
+              return request.URL!.host == Slaxplorer.CloudManager.URLHost
+            }, withStubResponse: {
+              (request: NSURLRequest) -> OHHTTPStubsResponse in
+              let obj = ["ok": false, "error": "wrongerror"]
+              return OHHTTPStubsResponse(JSONObject: obj, statusCode:200, headers:nil)
+          })
           loginVC.nextButtonTap(NSObject())
-          expect(loginVC.promptLabel.text).to(equal("Hmmm, something happened, but I'm not sure what"))
+          expect(loginVC.promptLabel.text).toEventually(equal("Hmmm, something happened, but I'm not sure what"), timeout: 3)
         }
         
         it("should handle robots") {
-          mockCM.mocks = (nil, .UserIsBot, .OK)
+          OHHTTPStubs.stubRequestsPassingTest({
+            (request: NSURLRequest) -> Bool in
+              return request.URL!.host == Slaxplorer.CloudManager.URLHost
+            }, withStubResponse: {
+              (request: NSURLRequest) -> OHHTTPStubsResponse in
+              let obj = ["ok": false, "error": "user_is_bot"]
+              return OHHTTPStubsResponse(JSONObject: obj, statusCode:200, headers:nil)
+          })
           loginVC.nextButtonTap(NSObject())
-          expect(loginVC.promptLabel.text).to(equal("It appears you are a robot"))
+          expect(loginVC.promptLabel.text).toEventually(equal("It appears you are a robot"), timeout: 3)
         }
-        
       }
-      
     }
   }
 }

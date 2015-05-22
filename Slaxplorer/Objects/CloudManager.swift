@@ -25,8 +25,9 @@ public class CloudManager: NSObject {
   
   // MARK: - Constants
   
-  let URLTeamInfo = "https://slack.com/api/team.info"
-  let URLUsersList = "https://slack.com/api/users.list"
+  static public let URLHost = "slack.com"
+  static public let URLTeamInfo = "https://slack.com/api/team.info"
+  static public let URLUsersList = "https://slack.com/api/users.list"
   
   // MARK: - State
   
@@ -36,7 +37,7 @@ public class CloudManager: NSObject {
   
   // The main CloudManager uses the Alamofire shared manager.
   // If needed, create different CloudManagers with different configs
-  class var mainManager: CloudManager {
+  public class var mainManager: CloudManager {
     var cm = CloudManager()
     cm.alamofireManager = Alamofire.Manager.sharedInstance
     return cm
@@ -71,7 +72,7 @@ public class CloudManager: NSObject {
       "token": safeToken!
     ]
     alamofireManager!
-      .request(.GET, URLTeamInfo, parameters: params)
+      .request(.GET, CloudManager.URLTeamInfo, parameters: params)
       .validate(statusCode: 200..<201)
       .responseJSON {
         (_: NSURLRequest, _: NSHTTPURLResponse?, json: AnyObject?, error: NSError?) -> Void in
@@ -141,7 +142,7 @@ public class CloudManager: NSObject {
       "token": safeToken!
     ]
     alamofireManager!
-      .request(.GET, URLUsersList, parameters: params)
+      .request(.GET, CloudManager.URLUsersList, parameters: params)
       .validate(statusCode: 200..<201)
       .responseJSON {
         (_: NSURLRequest, _: NSHTTPURLResponse?, json: AnyObject?, error: NSError?) -> Void in

@@ -225,6 +225,7 @@ public class LoginVC: UIViewController {
   // MARK: - Error reporting
   
   private func showError(text: String) {
+    println("showing error: \(text)")
     showPrompt(text)
     nextButtonState = .Error
     changeNextButtonToState(nextButtonState, animated: true)

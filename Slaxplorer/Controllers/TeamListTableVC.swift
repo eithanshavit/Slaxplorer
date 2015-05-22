@@ -11,7 +11,7 @@
 
 import UIKit
 
-class TeamListTableVC: UIViewController {
+public class TeamListTableVC: UIViewController {
   
   // MARK: - State
   
@@ -24,8 +24,9 @@ class TeamListTableVC: UIViewController {
   
   // MARK: General
   var dataStack: DataStack!
-  var cloudManager: CloudManager!
+  public var cloudManager: CloudManager!
   var team: Team!
+  public var toastText: String = ""
   
   // MARK: - Life Cycle
   
@@ -36,7 +37,7 @@ class TeamListTableVC: UIViewController {
     cloudManager = CloudManager.mainManager
   }
   
-  override func viewDidLoad() {
+  public override func viewDidLoad() {
     super.viewDidLoad()
     
     // Configure table view
@@ -58,18 +59,18 @@ class TeamListTableVC: UIViewController {
     showLoader(fetchedResultsController.fetchedObjects!.count == 0, animated: false)
     
     // Finally, update data
-    updateData()
+    updateData(team.token)
   }
   
-  override func didReceiveMemoryWarning() {
+  override public func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
   
   // MARK: - Data
   
-  func updateData() {
-    cloudManager.requestTeamMemberList(team.token, completion: handleMembersResponse)
+  public func updateData(token: String) {
+    cloudManager.requestTeamMemberList(token, completion: handleMembersResponse)
   }
   
   // Handle response from team member list request
@@ -80,16 +81,20 @@ class TeamListTableVC: UIViewController {
       highPriorityQueueExec() {
         DataManager.mainManager.syncTeamWithTempMembers(self.team, members: members!)
       }
+      return
     case (.OK, .AccountInactive):
-      showToast("The team you're interested in was deleted")
+      toastText = "The team you're interested in was deleted"
     case (.OK, .Unknown), (.UnknownFailure, _):
-      showToast("Hmmm, something happened, but I'm not sure what")
+      toastText = "Hmmm, something's wrong, but I'm not sure what"
     case (.InvalidAuth, _), (.NotAuth, _), (.ParseFailure, _):
-      showToast("Apologies, unable to connect")
+      toastText = "Apologies, unable to connect"
     case (.ConnectionFailure, _):
-      showToast("Apologies, unable to connect at the moment")
+      toastText = "Apologies, unable to connect at the moment"
     default:
       assertionFailure("Invalid code path")
+    }
+    if let label = toastLabel {
+      showToast(toastText)
     }
   }
   
@@ -193,7 +198,7 @@ class TeamListTableVC: UIViewController {
 
 extension TeamListTableVC: UITableViewDelegate {
   
-  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+  public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     let member = fetchedResultsController.objectAtIndexPath(indexPath) as! Member
     navigationController?.pushViewController(DetailMemberVC(member: member), animated: true)
   }
@@ -204,16 +209,16 @@ extension TeamListTableVC: UITableViewDelegate {
 
 extension TeamListTableVC: UITableViewDataSource {
   
-  func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+  public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     return 1
   }
   
-  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     let info = fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
     return info.numberOfObjects
   }
   
-  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+  public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let member = fetchedResultsController.objectAtIndexPath(indexPath) as! Member
     let cell = tableView.dequeueReusableCellWithIdentifier(TeamListTableViewCell.reuseIdentifier, forIndexPath: indexPath) as! TeamListTableViewCell
     cell.configureWithMember(member)

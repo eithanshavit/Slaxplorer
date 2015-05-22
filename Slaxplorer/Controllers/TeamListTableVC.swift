@@ -78,14 +78,10 @@ class TeamListTableVC: UIViewController {
       showToast("The team you're interested in was deleted")
     case (.OK, .Unknown), (.UnknownFailure, _):
       showToast("Hmmm, something happened, but I'm not sure what")
-    case (.NotAuth, _):
-      showToast("Apologies, no access token was provided")
-    case (.InvalidAuth, _):
-      showToast("Apologies, invalid access token was provided")
+    case (.InvalidAuth, _), (.NotAuth, _), (.ParseFailure, _):
+      showToast("Apologies, unable to connect")
     case (.ConnectionFailure, _):
       showToast("Apologies, unable to connect at the moment")
-    case (.ParseFailure, _):
-      showToast("Apologies, unable to get data from web")
     default:
       assertionFailure("Invalid code path")
     }
@@ -125,7 +121,7 @@ class TeamListTableVC: UIViewController {
   private lazy var fetchedResultsController: NSFetchedResultsController = {
     let moc = self.dataStack.managedObjectContext
     var fetchRequest = NSFetchRequest(entityName: Member.entityName())
-    fetchRequest.predicate = NSPredicate(format: "team == %@", self.team)
+    fetchRequest.predicate = NSPredicate(format: "team.id == %@", self.team.id)
     fetchRequest.sortDescriptors = [NSSortDescriptor(key: "username", ascending: true)]
     let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
     controller.delegate = self.fetchControllerDelegate
@@ -207,10 +203,9 @@ extension TeamListTableVC: UITableViewDataSource {
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    if let member = fetchedResultsController.objectAtIndexPath(indexPath) as? Member {
-      
-    }
-    return UITableViewCell()
-    
+    let member = fetchedResultsController.objectAtIndexPath(indexPath) as! Member
+    let cell = tableView.dequeueReusableCellWithIdentifier(TeamListTableViewCell.reuseIdentifier, forIndexPath: indexPath) as! TeamListTableViewCell
+    cell.configureWithMember(member)
+    return cell
   }
 }

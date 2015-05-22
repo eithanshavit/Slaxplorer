@@ -14,7 +14,9 @@
 		D008A0891B0D5E8A00D11D57 /* FetchControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D008A0881B0D5E8A00D11D57 /* FetchControllerDelegate.swift */; };
 		D008A08B1B0D7CC500D11D57 /* TempMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = D008A08A1B0D7CC500D11D57 /* TempMember.swift */; };
 		D008A08D1B0D7CEA00D11D57 /* TempTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = D008A08C1B0D7CEA00D11D57 /* TempTeam.swift */; };
-		D008A0911B0D7D4100D11D57 /* TeamListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D008A0901B0D7D4100D11D57 /* TeamListTableViewCell.swift */; };
+		D03872211B0EF5C2008FF54E /* TeamListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03872201B0EF5C2008FF54E /* TeamListTableViewCell.swift */; };
+		D03872231B0EF5D7008FF54E /* TeamListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D03872221B0EF5D6008FF54E /* TeamListTableViewCell.xib */; };
+		D03872251B0EFB03008FF54E /* MemberProfilePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03872241B0EFB03008FF54E /* MemberProfilePhoto.swift */; };
 		D0561D7F1B0BE6260026EEA0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0561D7E1B0BE6260026EEA0 /* Images.xcassets */; };
 		D0561D821B0BE6260026EEA0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0561D801B0BE6260026EEA0 /* LaunchScreen.xib */; };
 		D0561D8E1B0BE6260026EEA0 /* SlaxplorerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0561D8D1B0BE6260026EEA0 /* SlaxplorerTests.swift */; };
@@ -56,7 +58,9 @@
 		D008A0881B0D5E8A00D11D57 /* FetchControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FetchControllerDelegate.swift; path = Objects/FetchControllerDelegate.swift; sourceTree = "<group>"; };
 		D008A08A1B0D7CC500D11D57 /* TempMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TempMember.swift; path = Models/TempMember.swift; sourceTree = "<group>"; };
 		D008A08C1B0D7CEA00D11D57 /* TempTeam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TempTeam.swift; path = Models/TempTeam.swift; sourceTree = "<group>"; };
-		D008A0901B0D7D4100D11D57 /* TeamListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamListTableViewCell.swift; path = Views/TeamListTableViewCell.swift; sourceTree = "<group>"; };
+		D03872201B0EF5C2008FF54E /* TeamListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamListTableViewCell.swift; path = Views/TeamListTableViewCell.swift; sourceTree = "<group>"; };
+		D03872221B0EF5D6008FF54E /* TeamListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TeamListTableViewCell.xib; path = Views/TeamListTableViewCell.xib; sourceTree = "<group>"; };
+		D03872241B0EFB03008FF54E /* MemberProfilePhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemberProfilePhoto.swift; path = Objects/MemberProfilePhoto.swift; sourceTree = "<group>"; };
 		D0561D6F1B0BE6250026EEA0 /* Slaxplorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Slaxplorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0561D731B0BE6250026EEA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0561D7E1B0BE6260026EEA0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -203,7 +207,8 @@
 			isa = PBXGroup;
 			children = (
 				D0561D801B0BE6260026EEA0 /* LaunchScreen.xib */,
-				D008A0901B0D7D4100D11D57 /* TeamListTableViewCell.swift */,
+				D03872201B0EF5C2008FF54E /* TeamListTableViewCell.swift */,
+				D03872221B0EF5D6008FF54E /* TeamListTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -244,6 +249,7 @@
 				D0F390A21B0D287B00EB0DD6 /* Secrets.swift */,
 				D008A0861B0D586E00D11D57 /* CoreDataDebugger.swift */,
 				D008A0881B0D5E8A00D11D57 /* FetchControllerDelegate.swift */,
+				D03872241B0EFB03008FF54E /* MemberProfilePhoto.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -347,6 +353,7 @@
 			files = (
 				D0F390A71B0D432C00EB0DD6 /* TeamListTableVC.xib in Resources */,
 				D0F3909F1B0C40FA00EB0DD6 /* LoginVC.xib in Resources */,
+				D03872231B0EF5D7008FF54E /* TeamListTableViewCell.xib in Resources */,
 				D0561D821B0BE6260026EEA0 /* LaunchScreen.xib in Resources */,
 				D0561D7F1B0BE6260026EEA0 /* Images.xcassets in Resources */,
 			);
@@ -463,9 +470,11 @@
 				D0F390881B0C0CA300EB0DD6 /* Team.m in Sources */,
 				D0F3908D1B0C0CAF00EB0DD6 /* _Member.m in Sources */,
 				D008A08D1B0D7CEA00D11D57 /* TempTeam.swift in Sources */,
+				D03872211B0EF5C2008FF54E /* TeamListTableViewCell.swift in Sources */,
 				D0F390A11B0C5EBC00EB0DD6 /* CloudManager.swift in Sources */,
 				D0F390A61B0D432C00EB0DD6 /* TeamListTableVC.swift in Sources */,
 				D0F390931B0C0E8900EB0DD6 /* DataStack.swift in Sources */,
+				D03872251B0EFB03008FF54E /* MemberProfilePhoto.swift in Sources */,
 				D0F390791B0BF57000EB0DD6 /* AppDelegate.swift in Sources */,
 				D00425EA1B0E8DA400EB792A /* GDCUtils.swift in Sources */,
 				D0F390971B0C23FA00EB0DD6 /* DataManager.swift in Sources */,
@@ -476,7 +485,6 @@
 				D0F390811B0BF6A800EB0DD6 /* Slaxplorer.xcdatamodeld in Sources */,
 				D0F390871B0C0CA300EB0DD6 /* Member.m in Sources */,
 				D0F390951B0C119200EB0DD6 /* Errors.swift in Sources */,
-				D008A0911B0D7D4100D11D57 /* TeamListTableViewCell.swift in Sources */,
 				D0F390A31B0D287B00EB0DD6 /* Secrets.swift in Sources */,
 				D0F3908E1B0C0CAF00EB0DD6 /* _Team.m in Sources */,
 			);

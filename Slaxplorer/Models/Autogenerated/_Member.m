@@ -10,7 +10,6 @@ const struct MemberAttributes MemberAttributes = {
 	.isActive = @"isActive",
 	.isAdmin = @"isAdmin",
 	.isOwner = @"isOwner",
-	.localColorNumber = @"localColorNumber",
 	.optEmail = @"optEmail",
 	.optFirstName = @"optFirstName",
 	.optLastName = @"optLastName",
@@ -60,11 +59,6 @@ const struct MemberRelationships MemberRelationships = {
 	}
 	if ([key isEqualToString:@"isOwnerValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"isOwner"];
-		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
-		return keyPaths;
-	}
-	if ([key isEqualToString:@"localColorNumberValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"localColorNumber"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -136,26 +130,6 @@ const struct MemberRelationships MemberRelationships = {
 
 - (void)setPrimitiveIsOwnerValue:(BOOL)value_ {
 	[self setPrimitiveIsOwner:@(value_)];
-}
-
-@dynamic localColorNumber;
-
-- (int16_t)localColorNumberValue {
-	NSNumber *result = [self localColorNumber];
-	return [result shortValue];
-}
-
-- (void)setLocalColorNumberValue:(int16_t)value_ {
-	[self setLocalColorNumber:@(value_)];
-}
-
-- (int16_t)primitiveLocalColorNumberValue {
-	NSNumber *result = [self primitiveLocalColorNumber];
-	return [result shortValue];
-}
-
-- (void)setPrimitiveLocalColorNumberValue:(int16_t)value_ {
-	[self setPrimitiveLocalColorNumber:@(value_)];
 }
 
 @dynamic optEmail;

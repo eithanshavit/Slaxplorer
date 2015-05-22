@@ -7,7 +7,6 @@
         <attribute name="isActive" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="isAdmin" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="isOwner" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="localColorNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="optEmail" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="optFirstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="optLastName" optional="YES" attributeType="String" syncable="YES"/>
@@ -23,7 +22,7 @@
         <relationship name="members" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Member" inverseName="team" inverseEntity="Member" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Member" positionX="-54" positionY="18" width="128" height="240"/>
+        <element name="Member" positionX="-54" positionY="18" width="128" height="225"/>
         <element name="Team" positionX="-63" positionY="-18" width="128" height="120"/>
     </elements>
 </model>

@@ -40,21 +40,23 @@ class DataStack: NSObject {
   
   // When background MOC is saved, merge to main MOC
   func contextDidSavePrivateQueueContext(notification: NSNotification) {
-    self.managedObjectContext?.performBlock {
-      println("DataStack: Merging to Main MOC")
-      let updated = notification.userInfo![NSUpdatedObjectsKey] as! NSSet
-      for updatedObject in updated {
-        self.managedObjectContext.existingObjectWithID(updatedObject.objectID, error: nil)
+    dispatch_sync(lockQueue) {
+      self.managedObjectContext?.performBlock {
+        let updated = notification.userInfo![NSUpdatedObjectsKey] as! NSSet
+        for updatedObject in updated {
+          self.managedObjectContext.existingObjectWithID(updatedObject.objectID, error: nil)
+        }
+        self.managedObjectContext?.mergeChangesFromContextDidSaveNotification(notification)
       }
-      self.managedObjectContext?.mergeChangesFromContextDidSaveNotification(notification)
     }
   }
   
   // When main MOC is saved, merge to background MOC
   func contextDidSaveMainQueueContext(notification: NSNotification) {
-    self.backgroundManagedObjectContext?.performBlock {
-      println("DataStack: Merging to Background MOC")
-      self.backgroundManagedObjectContext?.mergeChangesFromContextDidSaveNotification(notification)
+    dispatch_sync(lockQueue) {
+      self.backgroundManagedObjectContext?.performBlock {
+        self.backgroundManagedObjectContext?.mergeChangesFromContextDidSaveNotification(notification)
+      }
     }
   }
   
@@ -106,6 +108,7 @@ class DataStack: NSObject {
     }
     var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
     managedObjectContext.persistentStoreCoordinator = coordinator
+    managedObjectContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     return managedObjectContext
     }()
   
@@ -117,6 +120,7 @@ class DataStack: NSObject {
     }
     var managedObjectContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
     managedObjectContext.persistentStoreCoordinator = coordinator
+    managedObjectContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     return managedObjectContext
     }()
   

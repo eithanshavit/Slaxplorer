@@ -1,4 +1,4 @@
-# Slaxplorer
+# Slaxplorer - Under construction...
 
 ## BUGS
 

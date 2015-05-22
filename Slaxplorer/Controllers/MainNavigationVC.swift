@@ -16,6 +16,7 @@ class MainNavigationVC: UINavigationController {
     dataStack = DataStack.sharedInstance
     
     if let team = DataManager.mainManager.loggedInTeam() {
+      setViewControllers([LoginVC(), TeamListTableVC(team: team)], animated: false)
     } else {
       setViewControllers([LoginVC()], animated: false)
     }

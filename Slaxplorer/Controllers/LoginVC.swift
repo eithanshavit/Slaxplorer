@@ -73,7 +73,7 @@ public class LoginVC: UIViewController {
     switch state {
     case .Loading:
       UIView.animateWithDuration(
-        animated ? 0.3 : 0,
+        animated ? 0.2 : 0,
         delay: 0,
         options: UIViewAnimationOptions.CurveEaseIn,
         animations: {
@@ -87,7 +87,7 @@ public class LoginVC: UIViewController {
         })
     case .Idle:
       UIView.animateWithDuration(
-        animated ? 0.3 : 0,
+        animated ? 0.2 : 0,
         delay: 0,
         options: UIViewAnimationOptions.CurveEaseIn,
         animations: {
@@ -101,7 +101,7 @@ public class LoginVC: UIViewController {
         })
     case .Error:
       UIView.animateWithDuration(
-        animated ? 0.3 : 0,
+        animated ? 0.2 : 0,
         delay: 0,
         options: UIViewAnimationOptions.CurveEaseIn,
         animations: {
@@ -195,7 +195,7 @@ public class LoginVC: UIViewController {
     promptContainer.alpha = 0
     promptContainer.hidden = false
     UIView.animateWithDuration(
-      0.3,
+      0.2,
       delay: 0,
       options: UIViewAnimationOptions.CurveEaseIn,
       animations: {
@@ -209,7 +209,7 @@ public class LoginVC: UIViewController {
   
   private func hidePrompt() {
     UIView.animateWithDuration(
-      0.3,
+      0.2,
       delay: 0,
       options: UIViewAnimationOptions.CurveEaseIn,
       animations: {
@@ -231,10 +231,13 @@ public class LoginVC: UIViewController {
   }
   
   // MARK: - Log out
+  
   func loggedOut(notification: NSNotification) {
-    nextButtonState = .Idle
-    changeNextButtonToState(nextButtonState, animated: false)
-    hidePrompt()
+    if let nextButton = nextButton {
+      nextButtonState = .Idle
+      changeNextButtonToState(nextButtonState, animated: false)
+      hidePrompt()
+    }
   }
 
 }

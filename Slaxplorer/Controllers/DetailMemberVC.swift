@@ -5,6 +5,9 @@
 //  Created by  Eithan Shavit on 5/22/15.
 //  Copyright (c) 2015 Eithan Shavit. All rights reserved.
 //
+//  Description:
+//  DetailMemberVC controls the presentation of the details of a single member.
+//  It also triggers fetches from CloudManager for updated data.
 
 import UIKit
 

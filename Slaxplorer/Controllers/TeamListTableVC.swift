@@ -76,7 +76,10 @@ class TeamListTableVC: UIViewController {
   private func handleMembersResponse(members: [TempMember]?, memberListDataStatus: MemberListDataStatus, connectionStatus: CloudManagerConnectionStatus) {
     switch (connectionStatus, memberListDataStatus) {
     case (.OK, .OK):
-      DataManager.mainManager.syncTeamWithTempMembers(team, members: members!)
+      // Perform data syncing in background
+      highPriorityQueueExec() {
+        DataManager.mainManager.syncTeamWithTempMembers(self.team, members: members!)
+      }
     case (.OK, .AccountInactive):
       showToast("The team you're interested in was deleted")
     case (.OK, .Unknown), (.UnknownFailure, _):

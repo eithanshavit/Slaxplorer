@@ -9,12 +9,19 @@
 // Struct to hold data of a temporary team before
 // it goes into persistent storage (Core Data)
 
-public struct TempTeam: Printable {
-  let id: String
-  let name: String
-  let token: String
+public class TempTeam: NSObject, Printable {
+  var id: String
+  var name: String
+  var token: String
   
-  public var description: String {
+  init(id: String, name: String, token: String) {
+    self.id = id
+    self.token = token
+    self.name = name
+    super.init()
+  }
+  
+  public override var description: String {
     return "ID \(id): \(name)"
   }
 }

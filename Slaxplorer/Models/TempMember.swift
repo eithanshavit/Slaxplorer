@@ -9,20 +9,24 @@
 // Struct to hold data of a temporary member before
 // it goes into persistent storage (Core Data)
 
-public struct TempMember: Printable {
-  let id: String
-  let username: String
-  let isActive: Bool
-  let isAdmin: Bool
-  let isOwner: Bool
-  let image48URL: String
-  let image192URL: String
-  let optFirstName: String?
-  let optLastName: String?
-  let optRealName: String?
-  let optEmail: String?
+public class TempMember: NSObject, Printable {
+  var id: String = ""
+  var username: String = ""
+  var isActive: Bool = false
+  var isAdmin: Bool = false
+  var isOwner: Bool = false
+  var image48URL: String = ""
+  var image192URL: String = ""
+  var optFirstName: String? = nil
+  var optLastName: String? = nil
+  var optRealName: String? = nil
+  var optEmail: String? = nil
   
-  public var description: String {
+  override init() {
+    super.init()
+  }
+  
+  public override var description: String {
     return "ID \(id): \(username)"
   }
 }

@@ -197,24 +197,26 @@ public class CloudManager: NSObject {
     }
   }
   
-  private func createTempMembersWithJSON(data: JSON) -> [TempMember] {
+  private func createTempMembersWithJSON(json: JSON) -> [TempMember] {
     var ret = [TempMember]()
-    for (index: String, member: JSON) in data {
+    for (index: String, memberJSON: JSON) in json {
       // This next block seems scary. But it's all protected by SwiftyJSON.
       // Any optional values coming from the cloud will be registered as Swift optionals.
-      let member = TempMember(
-        id: member["id"].stringValue,
-        username: member["name"].stringValue,
-        isActive: !member["deleted"].boolValue,
-        isAdmin: member["is_admin"].boolValue,
-        isOwner: member["is_owner"].boolValue,
-        image48URL: member["profile"]["image_48"].stringValue,
-        image192URL: member["profile"]["image_192"].stringValue,
-        optFirstName: member["profile"]["first_name"].string,
-        optLastName: member["profile"]["last_name"].string,
-        optRealName: member["profile"]["real_name"].string,
-        optEmail: member["profile"]["email"].string
-      )
+      let member: TempMember = {
+        var m = TempMember()
+        m.id = memberJSON["id"].stringValue
+        m.username = memberJSON["name"].stringValue
+        m.isActive = !memberJSON["deleted"].boolValue
+        m.isAdmin = memberJSON["is_admin"].boolValue
+        m.isOwner = memberJSON["is_owner"].boolValue
+        m.image48URL = memberJSON["profile"]["image_48"].stringValue
+        m.image192URL = memberJSON["profile"]["image_192"].stringValue
+        m.optFirstName = memberJSON["profile"]["first_name"].string
+        m.optLastName = memberJSON["profile"]["last_name"].string
+        m.optRealName = memberJSON["profile"]["real_name"].string
+        m.optEmail = memberJSON["profile"]["email"].string
+        return m
+      }()
       ret.append(member)
     }
     

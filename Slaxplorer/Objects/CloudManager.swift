@@ -94,10 +94,8 @@ public class CloudManager: NSObject {
         }
         if resOK! {
           // Response ok, create Team
-          let resId = data["team"]["id"].string
-          let resName = data["team"]["name"].string
-          if resId != nil && resName != nil {
-            completion(TempTeam(id: resId!, name: resName!, token: safeToken!), .OK, .OK)
+          if let resId = data["team"]["id"].string, resName = data["team"]["name"].string {
+            completion(TempTeam(id: resId, name: resName, token: safeToken!), .OK, .OK)
           } else {
             // Unable to parse team response
             completion(nil, .Unknown, .ParseFailure)

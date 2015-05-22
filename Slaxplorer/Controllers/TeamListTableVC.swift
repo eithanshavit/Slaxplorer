@@ -151,7 +151,7 @@ class TeamListTableVC: UIViewController {
     toastView.alpha = 0
     toastView.hidden = false
     UIView.animateWithDuration(
-      0.3,
+      0.5,
       delay: 0,
       options: UIViewAnimationOptions.CurveEaseIn,
       animations: {
@@ -160,7 +160,7 @@ class TeamListTableVC: UIViewController {
       },
       completion: {
         (Bool) -> Void in
-        delayExec(3) {
+        delayExec(5) {
           self.hideToast()
         }
       })

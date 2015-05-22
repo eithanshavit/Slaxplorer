@@ -34,5 +34,15 @@ class CoreDataDebugger: NSObject {
     }
   }
   
+  func printMembersOfTeamID(id: String) {
+    var fetchRequest = NSFetchRequest(entityName: Member.entityName())
+    fetchRequest.predicate = NSPredicate(format: "team.id == %@", id)
+    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "username", ascending: true)]
+    println("==Members of team [\(id)]===")
+    let results = dataStack.managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as! [Member]
+    results.map {println($0.username)}
+    println("=======")
+  }
+  
   
 }

@@ -187,6 +187,9 @@ class TeamListTableVC: UIViewController {
 
 extension TeamListTableVC: UITableViewDelegate {
   
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+  }
+  
 }
 
 // MARK: - UITableViewDataSource

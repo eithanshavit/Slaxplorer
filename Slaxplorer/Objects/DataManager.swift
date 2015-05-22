@@ -45,7 +45,7 @@ public class DataManager: NSObject {
     
     // See if team with already exists
     let fetchRequest = NSFetchRequest(entityName: Team.entityName())
-    let resultPredicate = NSPredicate(format: "id == %@", tempTeam.id)
+    fetchRequest.predicate = NSPredicate(format: "id == %@", tempTeam.id)
     var error: NSError?
     if let results = dataStack.managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as? [Team] {
       switch results.count {
@@ -54,6 +54,7 @@ public class DataManager: NSObject {
         team = NSEntityDescription.insertNewObjectForEntityForName(Team.entityName(), inManagedObjectContext: dataStack.managedObjectContext) as! Team
         team.id = tempTeam.id
       case 1:
+        // Found team
         team = results.first
       default:
         assertionFailure("There must be at most 1 team with ID \(tempTeam.id)")
@@ -88,7 +89,7 @@ public class DataManager: NSObject {
     
     // Fetch all loggedIn teams
     let fetchRequest = NSFetchRequest(entityName: Team.entityName())
-    let resultPredicate = NSPredicate(format: "loggedIn == %@", true)
+    fetchRequest.predicate = NSPredicate(format: "loggedIn == %@", true)
     var error: NSError?
     if let results = dataStack.managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as? [Team] {
       switch results.count {
@@ -115,7 +116,7 @@ public class DataManager: NSObject {
   func syncTeamWithTempMembers(team: Team, members: [TempMember]) {
     // First fetch background Team object
     let fetchRequest = NSFetchRequest(entityName: Team.entityName())
-    let resultPredicate = NSPredicate(format: "id == %@", team.id)
+    fetchRequest.predicate = NSPredicate(format: "id == %@", team.id)
     var error: NSError?
     var localTeam: Team!
     if let results = dataStack.backgroundManagedObjectContext.executeFetchRequest(fetchRequest, error: &error) as? [Team] {

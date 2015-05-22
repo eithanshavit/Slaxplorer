@@ -9,8 +9,12 @@
 // Struct to hold data of a temporary team before
 // it goes into persistent storage (Core Data)
 
-public struct TempTeam {
+public struct TempTeam: Printable {
   let id: String
   let name: String
   let token: String
+  
+  public var description: String {
+    return "ID \(id): \(name)"
+  }
 }

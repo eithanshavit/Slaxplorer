@@ -16,4 +16,5 @@ target 'SlaxplorerTests' do
   use_frameworks!
   pod 'Quick', '~> 0.3.1'
   pod 'Nimble'
+  pod 'OHHTTPStubs', '4.0.2'
 end

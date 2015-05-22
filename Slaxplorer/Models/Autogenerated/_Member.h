@@ -13,7 +13,9 @@ extern const struct MemberAttributes {
 	__unsafe_unretained NSString *optEmail;
 	__unsafe_unretained NSString *optFirstName;
 	__unsafe_unretained NSString *optLastName;
+	__unsafe_unretained NSString *optPhoneNumber;
 	__unsafe_unretained NSString *optRealName;
+	__unsafe_unretained NSString *optSkype;
 	__unsafe_unretained NSString *username;
 } MemberAttributes;
 
@@ -80,9 +82,17 @@ extern const struct MemberRelationships {
 
 //- (BOOL)validateOptLastName:(id*)value_ error:(NSError**)error_;
 
+@property (nonatomic, strong) NSString* optPhoneNumber;
+
+//- (BOOL)validateOptPhoneNumber:(id*)value_ error:(NSError**)error_;
+
 @property (nonatomic, strong) NSString* optRealName;
 
 //- (BOOL)validateOptRealName:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSString* optSkype;
+
+//- (BOOL)validateOptSkype:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSString* username;
 
@@ -132,8 +142,14 @@ extern const struct MemberRelationships {
 - (NSString*)primitiveOptLastName;
 - (void)setPrimitiveOptLastName:(NSString*)value;
 
+- (NSString*)primitiveOptPhoneNumber;
+- (void)setPrimitiveOptPhoneNumber:(NSString*)value;
+
 - (NSString*)primitiveOptRealName;
 - (void)setPrimitiveOptRealName:(NSString*)value;
+
+- (NSString*)primitiveOptSkype;
+- (void)setPrimitiveOptSkype:(NSString*)value;
 
 - (NSString*)primitiveUsername;
 - (void)setPrimitiveUsername:(NSString*)value;

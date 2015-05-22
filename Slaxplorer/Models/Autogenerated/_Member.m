@@ -13,7 +13,9 @@ const struct MemberAttributes MemberAttributes = {
 	.optEmail = @"optEmail",
 	.optFirstName = @"optFirstName",
 	.optLastName = @"optLastName",
+	.optPhoneNumber = @"optPhoneNumber",
 	.optRealName = @"optRealName",
+	.optSkype = @"optSkype",
 	.username = @"username",
 };
 
@@ -138,7 +140,11 @@ const struct MemberRelationships MemberRelationships = {
 
 @dynamic optLastName;
 
+@dynamic optPhoneNumber;
+
 @dynamic optRealName;
+
+@dynamic optSkype;
 
 @dynamic username;
 

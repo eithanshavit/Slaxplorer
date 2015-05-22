@@ -21,6 +21,8 @@ public class TempMember: NSObject, Printable {
   var optLastName: String? = nil
   var optRealName: String? = nil
   var optEmail: String? = nil
+  var optPhoneNumber: String? = nil
+  var optSkype: String? = nil
   
   override init() {
     super.init()

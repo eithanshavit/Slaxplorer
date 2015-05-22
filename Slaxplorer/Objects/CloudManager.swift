@@ -213,6 +213,8 @@ public class CloudManager: NSObject {
         m.optLastName = memberJSON["profile"]["last_name"].string
         m.optRealName = memberJSON["profile"]["real_name"].string
         m.optEmail = memberJSON["profile"]["email"].string
+        m.optPhoneNumber = memberJSON["profile"]["phone"].string
+        m.optSkype = memberJSON["profile"]["skype"].string
         return m
       }()
       ret.append(member)

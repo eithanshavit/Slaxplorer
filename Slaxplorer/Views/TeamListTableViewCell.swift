@@ -12,6 +12,9 @@ import UIKit
 
 class TeamListTableViewCell: UITableViewCell {
   
+  // MARK: - State
+  
+  // MARK: Outlets
   @IBOutlet weak var usernameLabel: UILabel!
   @IBOutlet weak var profileImageView: UIImageView!
   @IBOutlet weak var fullNameLabel: UILabel!
@@ -21,16 +24,21 @@ class TeamListTableViewCell: UITableViewCell {
     }
   }
   
+  // MARK: General
   static let reuseIdentifier = "TeamListTableViewCell"
   
   let imageCache = FICImageCache.sharedImageCache()
   
   var originalUsernameLabelOffset: CGFloat = 0
   
+  // MARK: - Life Cycle
+  
   override func awakeFromNib() {
     super.awakeFromNib()
-    // Initialization code
+    selectionStyle = .None
   }
+  
+  // MARK: - Configure
   
   func configureWithMember(member: Member) {
     // Configure labels

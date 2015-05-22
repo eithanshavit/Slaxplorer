@@ -197,6 +197,8 @@ public class DataManager: NSObject {
     member.optLastName = tempMember.optLastName
     member.optRealName = tempMember.optRealName
     member.optEmail = tempMember.optEmail
+    member.optPhoneNumber = tempMember.optPhoneNumber
+    member.optSkype = tempMember.optSkype
   }
 
 }

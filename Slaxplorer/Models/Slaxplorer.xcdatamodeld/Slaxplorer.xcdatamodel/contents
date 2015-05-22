@@ -10,7 +10,9 @@
         <attribute name="optEmail" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="optFirstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="optLastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optPhoneNumber" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="optRealName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optSkype" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="team" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="members" inverseEntity="Team" syncable="YES"/>
     </entity>
@@ -22,7 +24,7 @@
         <relationship name="members" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Member" inverseName="team" inverseEntity="Member" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Member" positionX="-54" positionY="18" width="128" height="225"/>
+        <element name="Member" positionX="-54" positionY="18" width="128" height="255"/>
         <element name="Team" positionX="-63" positionY="-18" width="128" height="120"/>
     </elements>
 </model>

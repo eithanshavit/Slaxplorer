@@ -191,6 +191,8 @@ class TeamListTableVC: UIViewController {
 extension TeamListTableVC: UITableViewDelegate {
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    let member = fetchedResultsController.objectAtIndexPath(indexPath) as! Member
+    navigationController?.pushViewController(DetailMemberVC(member: member), animated: true)
   }
   
 }

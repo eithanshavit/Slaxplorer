@@ -40,21 +40,21 @@ class DataStack: NSObject {
   
   // When background MOC is saved, merge to main MOC
   func contextDidSavePrivateQueueContext(notification: NSNotification) {
-    dispatch_sync(lockQueue) {
-      self.managedObjectContext?.performBlock {
-        println("DataStack: Merging to Main MOC")
-        self.managedObjectContext?.mergeChangesFromContextDidSaveNotification(notification)
+    self.managedObjectContext?.performBlock {
+      println("DataStack: Merging to Main MOC")
+      let updated = notification.userInfo![NSUpdatedObjectsKey] as! NSSet
+      for updatedObject in updated {
+        self.managedObjectContext.existingObjectWithID(updatedObject.objectID, error: nil)
       }
+      self.managedObjectContext?.mergeChangesFromContextDidSaveNotification(notification)
     }
   }
   
   // When main MOC is saved, merge to background MOC
   func contextDidSaveMainQueueContext(notification: NSNotification) {
-    dispatch_sync(lockQueue) {
-      self.backgroundManagedObjectContext?.performBlock {
-        println("DataStack: Merging to Background MOC")
-        self.backgroundManagedObjectContext?.mergeChangesFromContextDidSaveNotification(notification)
-      }
+    self.backgroundManagedObjectContext?.performBlock {
+      println("DataStack: Merging to Background MOC")
+      self.backgroundManagedObjectContext?.mergeChangesFromContextDidSaveNotification(notification)
     }
   }
   

@@ -33,17 +33,10 @@ class MainNavigationVC: UINavigationController {
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationBarHidden = true
-    interactivePopGestureRecognizer.delegate = self
   }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-}
-
-// MARK: - UIGestureRecognizerDelegate
-
-extension MainNavigationVC: UIGestureRecognizerDelegate {
-  
 }

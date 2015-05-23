@@ -1,4 +1,4 @@
-![Slaxplorer](/Assets/icon.png)  
+![Slaxplorer logo](/Assets/logo.png)  
 An iOS app for exploring your Slack team's members. The app presents a list of a team's members, and provides a detailed view of each member when selected.
 
 ## Authentication

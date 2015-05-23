@@ -1,5 +1,5 @@
-# Slaxplorer
-An iOS app to explore your Slack team's members. The app presents a list of a team's members, and provides a detailed view of each member when selected.
+![Slaxplorer](/Assets/icon.png)  
+An iOS app for exploring your Slack team's members. The app presents a list of a team's members, and provides a detailed view of each member when selected.
 
 ## Authentication
 Since this is an experimental app, it is not registered with Slack, and no access tokens are issued. This means that users can't use their Slack credentials to sign-in to their team.  

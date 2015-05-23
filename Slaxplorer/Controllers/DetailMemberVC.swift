@@ -69,7 +69,7 @@ class DetailMemberVC: UIViewController {
       self.profileImageView.image = image
     }
     if !imageExists {
-      self.profileImageView.image = MemberProfilePhoto.thumbPhotoForID(member.id)
+      self.profileImageView.image = MemberProfilePhoto.photoForID(member.id)
     }
     
     view.setNeedsLayout()

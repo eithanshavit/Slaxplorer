@@ -18,6 +18,7 @@ class DetailMemberVC: UIViewController {
   // MARK: Outlets
   @IBOutlet weak var constraintSubtitleSpacing: NSLayoutConstraint!
   @IBOutlet weak var constraintSubtitleHeight: NSLayoutConstraint!
+  @IBOutlet weak var constraintProfileImageWidth: NSLayoutConstraint!
   
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var subtitleLabel: UILabel!
@@ -70,6 +71,11 @@ class DetailMemberVC: UIViewController {
     }
     if !imageExists {
       self.profileImageView.image = MemberProfilePhoto.photoForID(member.id)
+    }
+    
+    // Adjust profile image size for smaller screens
+    if UIScreen.mainScreen().bounds.height <= 480 {
+      constraintProfileImageWidth.constant = 100
     }
     
     view.setNeedsLayout()

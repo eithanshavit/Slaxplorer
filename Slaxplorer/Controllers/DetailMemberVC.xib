@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailMemberVC" customModule="Slaxplorer" customModuleProvider="target">
             <connections>
+                <outlet property="constraintProfileImageWidth" destination="bor-ch-Jte" id="R6Z-Wu-YEe"/>
                 <outlet property="constraintSubtitleHeight" destination="5fK-CM-1sH" id="U1D-7k-dzL"/>
                 <outlet property="constraintSubtitleSpacing" destination="tfv-QN-hmz" id="QYO-js-Czq"/>
                 <outlet property="profileImageView" destination="Rea-Le-2PU" id="fq8-zX-zSa"/>

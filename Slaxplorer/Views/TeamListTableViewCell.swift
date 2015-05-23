@@ -40,7 +40,7 @@ class TeamListTableViewCell: UITableViewCell {
   
   // MARK: - Configure
   
-  func configureWithMember(member: Member) {
+  func configureWithMember(member: Member, indexPath: NSIndexPath) {
     // Configure labels
     fullNameLabel.hidden = false
     constraintUsernameLabelYFromCenter.constant = originalUsernameLabelOffset
@@ -54,10 +54,14 @@ class TeamListTableViewCell: UITableViewCell {
     }
     usernameLabel.text = "@" + member.username
     
-    // Get photo from cache and set it if cell is still visible
+    // Get photo from cache and set it.
+    // Tag cell with index path to ensure photo not delivered to a reused cell
+    tag = indexPath.row
     let imageExists = imageCache.retrieveImageForEntity(member, withFormatName: FastImageCacheManager.FICFormatNameProfilePhotoThumb) {
       (photoMessage, formatName, image) -> Void in
-      self.profileImageView.image = image
+      if self.tag == indexPath.row {
+        self.profileImageView.image = image
+      }
     }
     if !imageExists {
       self.profileImageView.image = MemberProfilePhoto.thumbPhotoForID(member.id)

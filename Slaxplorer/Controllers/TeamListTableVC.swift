@@ -78,7 +78,7 @@ public class TeamListTableVC: UIViewController {
     switch (connectionStatus, memberListDataStatus) {
     case (.OK, .OK):
       // Perform data syncing in background
-      highPriorityQueueExec() {
+      defaultPriorityQueueExec() {
         DataManager.mainManager.syncTeamWithTempMembers(self.team, members: members!)
       }
       return
@@ -221,7 +221,7 @@ extension TeamListTableVC: UITableViewDataSource {
   public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let member = fetchedResultsController.objectAtIndexPath(indexPath) as! Member
     let cell = tableView.dequeueReusableCellWithIdentifier(TeamListTableViewCell.reuseIdentifier, forIndexPath: indexPath) as! TeamListTableViewCell
-    cell.configureWithMember(member)
+    cell.configureWithMember(member, indexPath: indexPath)
     return cell
   }
 }

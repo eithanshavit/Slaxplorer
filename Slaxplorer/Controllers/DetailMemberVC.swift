@@ -86,7 +86,7 @@ class DetailMemberVC: UIViewController {
   // Creates a list MemberProperty objects to populate table view
   private func populateData() {
     if !member.isActive.boolValue {
-      data.append(MemberProperty(name: "NOTICE", value: "This member is deleted"))
+      data.append(MemberProperty(name: "NOTE", value: "this user was deleted"))
     }
     if member.optEmail != nil && member.optEmail != "" {
       data.append(MemberProperty(name: "email", value: member.optEmail!))

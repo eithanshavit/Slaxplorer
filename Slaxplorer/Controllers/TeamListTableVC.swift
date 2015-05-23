@@ -59,7 +59,11 @@ public class TeamListTableVC: UIViewController {
     showLoader(fetchedResultsController.fetchedObjects!.count == 0, animated: false)
     
     // Finally, update data
-    updateData(team.token)
+    // * Note, this delay is not necessary, but gives the user a more intuitve flow when
+    // they first log-in
+    delayExec(1) {
+      self.updateData(self.team.token)
+    }
   }
   
   override public func didReceiveMemoryWarning() {
@@ -71,6 +75,10 @@ public class TeamListTableVC: UIViewController {
   
   public func updateData(token: String) {
     cloudManager.requestTeamMemberList(token, completion: handleMembersResponse)
+    // Periodically poll for new data
+    delayExec(10) {
+      self.updateData(self.team.token)
+    }
   }
   
   // Handle response from team member list request

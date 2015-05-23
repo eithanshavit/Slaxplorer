@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     
-    // Run some startup debug code
+    // Trigger debug code hook
     CoreDataDebugger.sharedInstace.debugStartupHook()
     
     // Setup FastImageCache

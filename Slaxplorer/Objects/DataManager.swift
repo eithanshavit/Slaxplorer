@@ -116,73 +116,71 @@ public class DataManager: NSObject {
   // Note: on iOS 8 we can enjoy using NSBatchUpdateRequest to efficiently update the team's members.
   //       But in this case, the order of mangnitude of elements does not justify such complex optimization.
   func syncTeamWithTempMembers(team: Team, members: [TempMember]) {
-    // First fetch background Team object
-    let fetchRequest = NSFetchRequest(entityName: Team.entityName())
-    fetchRequest.predicate = NSPredicate(format: "id == %@", team.id)
-    var error: NSError?
-    var localTeam: Team!
-    if let results = dataStack.backgroundManagedObjectContext.executeFetchRequest(fetchRequest, error: &error) as? [Team] {
-      switch results.count {
-      case 0:
-        // Should never happen
-        assertionFailure("Unable to find Team with provided Team \(team)")
-      case 1:
-        localTeam = results.first!
-      default:
-        assertionFailure("There must be at most 1 team with ID \(team.id)")
-      }
-    } else {
-      println("Could not fetch \(error!), \(error!.userInfo)")
-      assertionFailure("Could not fetch")
-    }
-    
-    // Utility generic to convert an array to a dictionary with a given transformer
-    func toDictionary<E, K, V>(array: [E], transformer: (element: E) -> (key: K, value: V)?) -> Dictionary<K, V> {
-      return array.reduce([:]) {
-        (var dict, e) in
-        if let (key, value) = transformer(element: e) {
-          dict[key] = value
+    // Perform sync on the background MOC's thread
+    dataStack.backgroundManagedObjectContext.performBlock {
+      // First fetch background Team object
+      let fetchRequest = NSFetchRequest(entityName: Team.entityName())
+      fetchRequest.predicate = NSPredicate(format: "id == %@", team.id)
+      var error: NSError?
+      var localTeam: Team!
+      if let results = self.dataStack.backgroundManagedObjectContext.executeFetchRequest(fetchRequest, error: &error) as? [Team] {
+        switch results.count {
+        case 0:
+          // Should never happen
+          assertionFailure("Unable to find Team with provided Team \(team)")
+        case 1:
+          localTeam = results.first!
+        default:
+          assertionFailure("There must be at most 1 team with ID \(team.id)")
         }
-        return dict
+      } else {
+        println("Could not fetch \(error!), \(error!.userInfo)")
+        assertionFailure("Could not fetch")
       }
+      
+      // Utility generic to convert an array to a dictionary with a given transformer
+      func toDictionary<E, K, V>(array: [E], transformer: (element: E) -> (key: K, value: V)?) -> Dictionary<K, V> {
+        return array.reduce([:]) {
+          (var dict, e) in
+          if let (key, value) = transformer(element: e) {
+            dict[key] = value
+          }
+          return dict
+        }
+      }
+      
+      // Form sets to figure out which team members need update, addition, or deletion
+      let idToMemberMap = toDictionary(Array(localTeam.members as! Set<Member>)) {($0.id, $0)}
+      let idToTempMemberMap = toDictionary(members) {($0.id, $0)}
+      let idSet = Set(Array(localTeam.members as! Set<Member>).map {$0.id})
+      let tempIDSet = Set(members.map {$0.id})
+      let idsToUpdate = tempIDSet.intersect(idSet)
+      let idsToDelete = idSet.subtract(tempIDSet)
+      let idsToAdd = tempIDSet.subtract(idSet)
+      
+      // Update existing members
+      for id in idsToUpdate {
+        let member = idToMemberMap[id]!
+        let tempMember = idToTempMemberMap[id]!
+        self.updateMemberWithTempMember(member, tempMember: tempMember)
+      }
+      // Add new members
+      for id in idsToAdd {
+        let member = NSEntityDescription.insertNewObjectForEntityForName(Member.entityName(), inManagedObjectContext: self.dataStack.backgroundManagedObjectContext) as! Member
+        member.id = id
+        let tempMember = idToTempMemberMap[id]!
+        self.updateMemberWithTempMember(member, tempMember: tempMember)
+        localTeam!.addMembersObject(member)
+      }
+      // Delete unnecessary members
+      for id in idsToDelete {
+        let member = idToMemberMap[id]!
+        localTeam.removeMembersObject(member)
+      }
+
+      // Phew... Now save the background context
+      self.dataStack.saveBackgroundContext()
     }
-    
-    // Form sets to figure out which team members need update, addition, or deletion
-    let idToMemberMap = toDictionary(Array(localTeam.members as! Set<Member>)) {($0.id, $0)}
-    let idToTempMemberMap = toDictionary(members) {($0.id, $0)}
-    let idSet = Set(Array(localTeam.members as! Set<Member>).map {$0.id})
-    let tempIDSet = Set(members.map {$0.id})
-    let idsToUpdate = tempIDSet.intersect(idSet)
-    let idsToDelete = idSet.subtract(tempIDSet)
-    let idsToAdd = tempIDSet.subtract(idSet)
-    
-    // Update existing members
-    //println("-START UPDATE-")
-    for id in idsToUpdate {
-      let member = idToMemberMap[id]!
-      let tempMember = idToTempMemberMap[id]!
-      updateMemberWithTempMember(member, tempMember: tempMember)
-      //println("UPDATING \(member.username)")
-    }
-    // Add new members
-    for id in idsToAdd {
-      let member = NSEntityDescription.insertNewObjectForEntityForName(Member.entityName(), inManagedObjectContext: dataStack.backgroundManagedObjectContext) as! Member
-      member.id = id
-      let tempMember = idToTempMemberMap[id]!
-      updateMemberWithTempMember(member, tempMember: tempMember)
-      localTeam!.addMembersObject(member)
-      //println("ADDING \(tempMember.username)")
-    }
-    // Delete unnecessary members
-    for id in idsToDelete {
-      let member = idToMemberMap[id]!
-      localTeam.removeMembersObject(member)
-      //println("DELETING \(member.username)")
-    }
-    //println("-END UPDATE-")
-    
-    // Phew... Now save the background context
-    dataStack.saveBackgroundContext()
   }
   
   // Updates a local Member object with properties from a TempMember object.

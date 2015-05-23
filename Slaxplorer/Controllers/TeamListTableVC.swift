@@ -76,7 +76,7 @@ public class TeamListTableVC: UIViewController {
   public func updateData(token: String) {
     cloudManager.requestTeamMemberList(token, completion: handleMembersResponse)
     // Periodically poll for new data
-    delayExec(10) {
+    delayExec(15) {
       self.updateData(self.team.token)
     }
   }

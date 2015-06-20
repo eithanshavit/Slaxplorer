@@ -53,6 +53,3 @@ In spite of being an exercise, the app was designed to be used in production and
 ## What's Next
 * Implement Slack authentication using user's credentials
 * BDD test suite for DataManager
-
-## Caveats
-* The exercise states that the 'title' of a user must be presented, however, no such property exists in the API documentation
